@@ -3,7 +3,7 @@ import { withStyles, withTheme } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
 
 // components
-import ButtonLink from "../components/ButtonLink";
+import Nav from "../components/Nav";
 
 // common styles
 import { pageWrapper, main } from "../styles/common";
@@ -13,17 +13,13 @@ const styles = theme => ({
   main: { ...main }
 });
 
-const Sprinkler = ({ classes }) => {
+const Main = ({ classes, children }) => {
   return (
     <div className={classes.pageWrapper}>
-      <main className={classes.main}>
-        <h2>Sprinkler</h2>
-        <ButtonLink to="/main" variant="outlined" color="primary" size="large">
-          Continue
-        </ButtonLink>
-      </main>
+      {children}
+      <Nav />
     </div>
   );
 };
 
-export default withRoot(withStyles(styles)(withTheme()(Sprinkler)));
+export default withRoot(withStyles(styles)(withTheme()(Main)));
