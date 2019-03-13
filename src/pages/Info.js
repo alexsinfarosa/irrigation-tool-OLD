@@ -13,7 +13,9 @@ const styles = theme => ({
 const Info = ({ classes }) => {
   return (
     <main className={classes.main}>
-      <h2>INFO</h2>
+      <Typography variant="h4" gutterBottom>
+        About
+      </Typography>
       <Typography paragraph gutterBottom>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
         dolor dolorum optio, nam quae voluptate placeat ducimus provident

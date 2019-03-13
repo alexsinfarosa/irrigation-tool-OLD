@@ -12,11 +12,11 @@ import { InlineDatePicker } from "material-ui-pickers";
 import format from "date-fns/format";
 
 // common styles
-import { locationRoot, locationMain } from "../styles/common";
+import { locationRoot, main } from "../styles/common";
 
 const styles = theme => ({
   root: { ...locationRoot },
-  main: { ...locationMain }
+  main: { ...main }
 });
 
 const IrrigationDate = ({ classes }) => {
@@ -37,6 +37,7 @@ const IrrigationDate = ({ classes }) => {
             onlyCalendar
             variant="outlined"
             disableFuture
+            keyboard="off"
             // minDate={`03/01/${new Date().getFullYear()}`}
             minDateMessage="Data is only available after March 1st."
             format={format(new Date(irrigationDate), "MM/dd/yyyy")}

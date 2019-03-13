@@ -22,11 +22,11 @@ import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 
 // common styles
-import { locationRoot, locationMain } from "../styles/common";
+import { locationRoot, main } from "../styles/common";
 
 const styles = theme => ({
   root: { ...locationRoot },
-  main: { ...locationMain }
+  main: { ...main }
 });
 
 // Initial State ---------------------------
@@ -65,11 +65,11 @@ function reducer(state, action) {
 }
 
 const Location = ({ classes, theme }) => {
-  // STATE --------------------------------------------------------
+  // STATE ------------------------------------------------
   const [state, dispatch] = React.useReducer(reducer, initialState());
   const [errorMessage, setErrorMessage] = React.useState("");
 
-  // Handle address change ------------------------------------------
+  // Handle address change --------------------------------
   const handleAddressChange = address => {
     dispatch({ type: "setAddress", address });
     setErrorMessage("");

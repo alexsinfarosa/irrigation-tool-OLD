@@ -18,7 +18,7 @@ import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 
 // common styles
-import { locationRoot, locationMain } from "../styles/common";
+import { locationRoot, main } from "../styles/common";
 
 // images
 import SpraySprinkler from "../images/spraySprinkler.png";
@@ -57,7 +57,7 @@ const sprinklers = [
 
 const styles = theme => ({
   root: { ...locationRoot },
-  main: { ...locationMain },
+  main: { ...main },
   containerList: {
     display: "flex",
     flexWrap: "wrap",

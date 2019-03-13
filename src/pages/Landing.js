@@ -17,17 +17,17 @@ const styles = theme => ({
   titleText: {
     color: theme.palette.text.secondary,
     fontWeight: "700",
-    marginBottom: theme.spacing.unit * 4
+    marginBottom: 32
   },
   smallTextTop: {
     padding: 16,
     background: theme.palette.primary.main,
     color: "white",
-    marginBottom: theme.spacing.unit * 4
+    marginBottom: 32
   },
   smallTextBottom: {
     padding: 16,
-    marginBottom: theme.spacing.unit * 4
+    marginBottom: 32
   }
 });
 

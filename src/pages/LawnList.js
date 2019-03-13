@@ -1,6 +1,7 @@
 import React from "react";
 import { withStyles, withTheme } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
+import Typography from "@material-ui/core/Typography";
 
 // components
 import Nav from "../components/Nav";
@@ -17,7 +18,9 @@ const LawnList = ({ classes }) => {
   return (
     <div className={classes.pageWrapper}>
       <main className={classes.main}>
-        <h2>List of Lawns</h2>
+        <Typography variant="h4" gutterBottom>
+          Lawns
+        </Typography>
       </main>
 
       <Nav />
