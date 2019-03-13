@@ -21,7 +21,7 @@ const styles = theme => ({
   },
   smallTextTop: {
     padding: 16,
-    background: theme.palette.primary.light,
+    background: theme.palette.primary.main,
     color: "white",
     marginBottom: theme.spacing.unit * 4
   },

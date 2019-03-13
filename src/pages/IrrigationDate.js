@@ -4,6 +4,7 @@ import withRoot from "../withRoot";
 
 // components
 import ButtonLink from "../components/ButtonLink";
+import Header from "../components/Header";
 
 // common styles
 import { pageWrapper, main } from "../styles/common";
@@ -16,6 +17,7 @@ const styles = theme => ({
 const IrrigationDate = ({ classes }) => {
   return (
     <div className={classes.pageWrapper}>
+      <Header icon="chevron-left" title="Irrigation Date - (step 2/3)" />
       <main className={classes.main}>
         <h2>IrrigationDate</h2>
         <ButtonLink

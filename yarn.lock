@@ -1090,14 +1090,6 @@
     recompose "0.28.0 - 0.30.0"
     warning "^4.0.1"
 
-"@material-ui/icons@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-3.0.2.tgz#d67a6dd1ec8312d3a88ec97944a63daeef24fe10"
-  integrity sha512-QY/3gJnObZQ3O/e6WjH+0ah2M3MOgLOzCy8HTUoUx9B6dDrS18vP7Ycw3qrDEKlB6q1KNxy6CZHm5FCauWGy2g==
-  dependencies:
-    "@babel/runtime" "^7.2.0"
-    recompose "0.28.0 - 0.30.0"
-
 "@material-ui/system@^3.0.0-alpha.0":
   version "3.0.0-alpha.2"
   resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-3.0.0-alpha.2.tgz#096e80c8bb0f70aea435b9e38ea7749ee77b4e46"
@@ -4912,6 +4904,11 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
+hide-virtual-keyboard@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/hide-virtual-keyboard/-/hide-virtual-keyboard-1.0.1.tgz#88ade91319d1602ff4931012a2e22357698a2394"
+  integrity sha512-LhXIR5C8028et39q8LGWzUkKPMZrngMrQNSrN3GwLQCguyftWFapMrD6nQtR9Xm1voe5pTGYgvVgIu8cmJ6Y+g==
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -8383,7 +8380,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -8638,6 +8635,14 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-places-autocomplete@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/react-places-autocomplete/-/react-places-autocomplete-7.2.1.tgz#ecdfdbb530ba19fedddd967a646642c2efd225cf"
+  integrity sha512-X1SRv3zJjEZ9dnfy/vlSFi8dpUZc/vW4CF7GhN46AVATNMmB1y1EwhX2aiqKVWXO1888p9l7FMJLgySPRBDMCQ==
+  dependencies:
+    lodash.debounce "^4.0.8"
+    prop-types "^15.5.8"
 
 react-scripts@2.1.8:
   version "2.1.8"

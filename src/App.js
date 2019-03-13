@@ -18,13 +18,14 @@ import LawnList from "./pages/LawnList";
 
 // fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { faChevronLeft } from "@fortawesome/pro-solid-svg-icons";
 import {
   faHome,
   faInfoCircle,
   faThList,
   faCloud
 } from "@fortawesome/pro-light-svg-icons";
-library.add(faHome, faInfoCircle, faThList, faCloud);
+library.add(faHome, faInfoCircle, faThList, faCloud, faChevronLeft);
 
 const App = () => {
   const [loading, setLoading] = React.useState(false);

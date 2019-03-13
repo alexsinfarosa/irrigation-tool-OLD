@@ -4,7 +4,11 @@ import { Link } from "@reach/router";
 
 function ButtonLink(props) {
   return (
-    <MuiButton component={Link} {...props} style={{ padding: "24px 48px" }} />
+    <MuiButton
+      component={Link}
+      {...props}
+      style={{ padding: "24px 48px", fontSize: "1.1rem" }}
+    />
   );
 }
 
