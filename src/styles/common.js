@@ -5,8 +5,16 @@ export const pageWrapper = {
 export const main = {
   overflow: "auto",
   height: "100vh",
-  paddingTop: 16,
-  paddingLeft: 16,
-  paddingRight: 16,
-  paddingBottom: 90
+  padding: 16
+};
+
+// location, irrigationDate and sprinkler page
+export const locationRoot = {
+  display: "grid",
+  gridTemplateRows: "60px auto 80px",
+  height: "100vh"
+};
+
+export const locationMain = {
+  padding: 16
 };

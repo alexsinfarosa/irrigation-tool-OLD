@@ -22,17 +22,11 @@ import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 
 // common styles
-import { main } from "../styles/common";
+import { locationRoot, locationMain } from "../styles/common";
 
 const styles = theme => ({
-  root: {
-    display: "grid",
-    gridTemplateRows: "60px auto 90px",
-    height: "100vh"
-  },
-  main: {
-    padding: 16
-  }
+  root: { ...locationRoot },
+  main: { ...locationMain }
 });
 
 // Initial State ---------------------------
