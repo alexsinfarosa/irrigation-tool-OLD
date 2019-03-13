@@ -123,7 +123,7 @@ const Location = ({ classes, theme }) => {
         </Typography>
 
         <br />
-        <Typography variant="caption" align="center" gutterBottom>
+        <Typography variant="body2" align="center" gutterBottom>
           Weather data is only available for Nassau County
         </Typography>
 

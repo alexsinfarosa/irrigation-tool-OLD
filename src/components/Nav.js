@@ -12,10 +12,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const styles = theme => ({
   root: {
-    width: "100%",
+    maxWidth: 640,
+    margin: "0 auto",
     height: 90,
     position: "fixed",
     bottom: 0,
+    left: 0,
+    right: 0,
     opacity: 0.95,
     display: "flex",
     alignItems: "flex-start"

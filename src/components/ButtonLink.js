@@ -7,7 +7,12 @@ function ButtonLink(props) {
     <MuiButton
       component={Link}
       {...props}
-      style={{ padding: "24px 48px", fontSize: "1.1rem", height: 80 }}
+      style={{
+        paddingLeft: 24,
+        paddingRight: 24,
+        fontSize: "1.1rem",
+        height: 80
+      }}
     />
   );
 }

@@ -31,23 +31,25 @@ const App = () => {
   const [loading, setLoading] = React.useState(false);
   return (
     <AppContext.Provider value={{ loading, setLoading }}>
-      {loading ? (
-        <Loading />
-      ) : (
-        <Router>
-          <Landing path="/" />
-          <Location path="location" />
-          <IrrigationDate path="irrigationDate" />
-          <Sprinkler path="sprinkler" />
+      <div style={{ maxWidth: 640, margin: "0 auto" }}>
+        {loading ? (
+          <Loading />
+        ) : (
+          <Router>
+            <Landing path="/" />
+            <Location path="location" />
+            <IrrigationDate path="irrigationDate" />
+            <Sprinkler path="sprinkler" />
 
-          <Main path="main">
-            <Info path="info" />
-            <Lawn path="/" />
-            <Forecast path="forecast" />
-            <LawnList path="lawns" />
-          </Main>
-        </Router>
-      )}
+            <Main path="main">
+              <Info path="info" />
+              <Lawn path="/" />
+              <Forecast path="forecast" />
+              <LawnList path="lawns" />
+            </Main>
+          </Router>
+        )}
+      </div>
     </AppContext.Provider>
   );
 };

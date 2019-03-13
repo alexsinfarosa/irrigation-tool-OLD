@@ -7,7 +7,6 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
 
 // libs
 import "rc-slider/assets/index.css";
@@ -174,8 +173,7 @@ const Sprinkler = ({ classes, theme }) => {
             {sprinklers.map(sprinkler => {
               return (
                 <GridListTile key={sprinkler.img}>
-                  <img src={sprinkler.img} />
-                  {/* <img src={tile.img} alt={tile.title} /> */}
+                  <img src={sprinkler.img} alt={sprinkler.title} />
                   <GridListTileBar
                     title={sprinkler.name}
                     classes={{

@@ -8,7 +8,7 @@ import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 
 // utils
-import { InlineDatePicker } from "material-ui-pickers";
+import { DatePicker } from "material-ui-pickers";
 import format from "date-fns/format";
 
 // common styles
@@ -33,11 +33,11 @@ const IrrigationDate = ({ classes }) => {
 
         <br />
         <div style={{ textAlign: "center", marginTop: 16 }}>
-          <InlineDatePicker
-            onlyCalendar
+          <DatePicker
             variant="outlined"
             disableFuture
-            keyboard="off"
+            keyboard
+            showTodayButton
             // minDate={`03/01/${new Date().getFullYear()}`}
             minDateMessage="Data is only available after March 1st."
             format={format(new Date(irrigationDate), "MM/dd/yyyy")}
