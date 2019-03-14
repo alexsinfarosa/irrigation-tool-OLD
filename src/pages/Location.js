@@ -23,6 +23,7 @@ import Header from "../components/Header";
 
 // common styles
 import { locationRoot, main } from "../styles/common";
+import AppContext from "../context/appContext";
 
 const styles = theme => ({
   root: { ...locationRoot },
@@ -33,7 +34,6 @@ const styles = theme => ({
 const initialState = () => {
   return {
     address: "",
-    isStreetNumber: true,
     lat: null,
     lng: null,
     streetNumber: null
@@ -45,8 +45,6 @@ function reducer(state, action) {
   switch (action.type) {
     case "setAddress":
       return { ...state, address: action.address };
-    case "toggleStreetNumber":
-      return { ...state, isStreetNumber: !state.isStreetNumber };
     case "setLatLng":
       return { ...state, lat: action.lat, lng: action.lng };
     case "setStreetNumber":
@@ -54,7 +52,6 @@ function reducer(state, action) {
     case "reset":
       return {
         address: "",
-        isStreetNumber: true,
         lat: null,
         lng: null,
         streetNumber: null
@@ -65,8 +62,12 @@ function reducer(state, action) {
 }
 
 const Location = ({ classes, theme }) => {
+  // CONTEXT -----------------------------------------------
+  const { updateState } = React.useContext(AppContext);
+
   // STATE ------------------------------------------------
   const [state, dispatch] = React.useReducer(reducer, initialState());
+  const [hasStreetNumber, toggleHasStreetNumber] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
 
   // Handle address change --------------------------------
@@ -90,7 +91,7 @@ const Location = ({ classes, theme }) => {
     geocodeByAddress(address)
       .then(results => {
         const formattedAddress = results[0].formatted_address;
-        if (state.isStreetNumber) {
+        if (hasStreetNumber) {
           determineStreetNumber(formattedAddress);
         }
         return getLatLng(results[0]);
@@ -132,9 +133,9 @@ const Location = ({ classes, theme }) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.isStreetNumber}
+                checked={hasStreetNumber}
                 color="primary"
-                onChange={() => dispatch({ type: "toggleStreetNumber" })}
+                onChange={() => toggleHasStreetNumber(!hasStreetNumber)}
               />
             }
             label="My street number follows the odd/even irrigation ordinance"
@@ -242,6 +243,7 @@ const Location = ({ classes, theme }) => {
           variant="contained"
           fullWidth
           color="primary"
+          onClick={() => updateState(state)}
         >
           Continue
         </ButtonLink>

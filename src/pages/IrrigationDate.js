@@ -13,6 +13,7 @@ import format from "date-fns/format";
 
 // common styles
 import { locationRoot, main } from "../styles/common";
+import AppContext from "../context/appContext";
 
 const styles = theme => ({
   root: { ...locationRoot },
@@ -20,8 +21,22 @@ const styles = theme => ({
 });
 
 const IrrigationDate = ({ classes }) => {
+  // CONTEXT ---------------------------------------------------
+  const { updateState } = React.useContext(AppContext);
+
   // State ---------------------------------------------------
-  const [irrigationDate, setIrrigationDate] = React.useState(new Date());
+  const thisYear = new Date().getFullYear();
+  const [irrigationDate, setIrrigationDate] = React.useState({
+    irrigationDate: new Date().toLocaleDateString(),
+    isThisYear: true
+  });
+
+  const handleIrrigationDate = date => {
+    setIrrigationDate({
+      irrigationDate: date.toLocaleDateString(),
+      isThisYear: date.getFullYear() === thisYear
+    });
+  };
 
   return (
     <div className={classes.root}>
@@ -40,15 +55,24 @@ const IrrigationDate = ({ classes }) => {
             showTodayButton
             // minDate={`03/01/${new Date().getFullYear()}`}
             minDateMessage="Data is only available after March 1st."
-            format={format(new Date(irrigationDate), "MM/dd/yyyy")}
+            format={format(
+              new Date(irrigationDate.irrigationDate),
+              "MM/dd/yyyy"
+            )}
             label="Irrigation Date"
-            value={irrigationDate}
-            onChange={setIrrigationDate}
+            value={irrigationDate.irrigationDate}
+            onChange={handleIrrigationDate}
             style={{ width: 250 }}
           />
         </div>
       </main>
-      <ButtonLink to="/sprinkler" variant="contained" fullWidth color="primary">
+      <ButtonLink
+        to="/sprinkler"
+        variant="contained"
+        fullWidth
+        color="primary"
+        onClick={() => updateState(irrigationDate)}
+      >
         Continue
       </ButtonLink>
     </div>

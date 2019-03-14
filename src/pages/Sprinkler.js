@@ -24,33 +24,30 @@ import SpraySprinkler from "../images/spraySprinkler.png";
 import SingleStreamRotor from "../images/singleStreamRotorSprinkler.png";
 import MultipleStreamRotor from "../images/multipleStreamRotorSprinkler.png";
 import MoveableSprinkler from "../images/moveableSprinkler.png";
+import AppContext from "../context/appContext";
 
 // slider tooltip
 const SliderWithTooltip = createSliderWithTooltip(Slider);
 const sprinklers = [
   {
-    name: "Spray Sprinkler",
-    img: SpraySprinkler,
-    waterFlow: 0.02, // inches of water
-    minutes: 10
+    sprinklerType: "Spray Sprinkler",
+    sprinklerImg: SpraySprinkler,
+    sprinklerRate: 0.02 // inches of water/min
   },
   {
-    name: "Single Stream Rotor",
-    img: SingleStreamRotor,
-    waterFlow: 0.01,
-    minutes: 10
+    sprinklerType: "Single Stream Rotor",
+    sprinklerImg: SingleStreamRotor,
+    sprinklerRate: 0.01
   },
   {
-    name: "Multiple Stream Rotor",
-    img: MultipleStreamRotor,
-    waterFlow: 0.01,
-    minutes: 10
+    sprinklerType: "Multiple Stream Rotor",
+    sprinklerImg: MultipleStreamRotor,
+    sprinklerRate: 0.01
   },
   {
-    name: "Moveable Sprinkler",
-    img: MoveableSprinkler,
-    waterFlow: 0.022,
-    minutes: 10
+    sprinklerType: "Moveable Sprinkler",
+    sprinklerImg: MoveableSprinkler,
+    sprinklerRate: 0.022
   }
 ];
 
@@ -105,10 +102,10 @@ const styles = theme => ({
 // Initial state ------------------------------------------------------
 const initialState = () => {
   return {
-    name: "",
-    img: null,
-    waterFlow: 0.05,
-    minutes: 10
+    sprinklerType: "",
+    sprinklerImg: null,
+    sprinklerRate: 0.05,
+    sprinklerMinutes: 20
   };
 };
 
@@ -118,36 +115,45 @@ function reducer(state, action) {
     case "setSprinkler":
       return {
         ...state,
-        name: action.name,
-        img: action.img,
-        waterFlow: action.waterFlow,
-        minutes: action.minutes
+        sprinklerType: action.sprinklerType,
+        sprinklerImg: action.sprinklerImg,
+        sprinklerRate: action.sprinklerRate
       };
     case "setMinutes":
-      return { ...state, minutes: action.minutes };
+      return { ...state, sprinklerMinutes: action.sprinklerMinutes };
     case "reset":
-      return { name: "", img: null, waterFlow: 0, minutes: 10 };
+      return {
+        sprinklerType: "",
+        sprinklerImg: null,
+        sprinklerRate: 0.05,
+        sprinklerMinutes: 20
+      };
     default:
       throw new Error();
   }
 }
 
 const Sprinkler = ({ classes, theme }) => {
+  // CONTEXT ------------------------------------------
+  const { updateState } = React.useContext(AppContext);
   // State --------------------------------------------
   const [state, dispatch] = React.useReducer(reducer, initialState());
 
   // selecting the sprinkler --------------------------------------------
   function toggleImage(event) {
-    if (event.target.value === state.name) {
+    if (event.target.value === state.sprinklerType) {
       dispatch({ type: "reset" });
     } else {
-      const spk = sprinklers.find(s => s.name === event.target.value);
+      const spk = sprinklers.find(s => s.sprinklerType === event.target.value);
       dispatch({
         type: "setSprinkler",
-        name: spk.name,
-        img: spk.img,
-        waterFlow: spk.waterFlow,
-        minutes: spk.minutes
+        sprinklerType: spk.sprinklerType,
+        sprinklerImg: spk.sprinklerImg,
+        sprinklerRate: spk.sprinklerRate
+      });
+      dispatch({
+        type: "setMinutes",
+        sprinklerMinutes: state.sprinklerMinutes
       });
     }
   }
@@ -170,12 +176,12 @@ const Sprinkler = ({ classes, theme }) => {
 
         <div className={classes.containerList}>
           <GridList className={classes.gridList} cols={1.5}>
-            {sprinklers.map(sprinkler => {
+            {sprinklers.map(s => {
               return (
-                <GridListTile key={sprinkler.img}>
-                  <img src={sprinkler.img} alt={sprinkler.title} />
+                <GridListTile key={s.sprinklerImg}>
+                  <img src={s.sprinklerImg} alt={s.sprinklerType} />
                   <GridListTileBar
-                    title={sprinkler.name}
+                    title={s.sprinklerType}
                     classes={{
                       root: classes.titleBar,
                       title: classes.title
@@ -183,9 +189,9 @@ const Sprinkler = ({ classes, theme }) => {
                     actionIcon={
                       <IconButton>
                         <Checkbox
-                          checked={state.name === sprinkler.name}
+                          checked={state.sprinklerType === s.sprinklerType}
                           onChange={toggleImage}
-                          value={sprinkler.name}
+                          value={s.sprinklerType}
                           style={{ color: "#fff" }}
                         />
                       </IconButton>
@@ -199,8 +205,8 @@ const Sprinkler = ({ classes, theme }) => {
 
         <div style={{ padding: "16px 24px" }}>
           <Typography variant="body1" align="center" gutterBottom>
-            The sprinkler runs for {state.minutes}{" "}
-            {state.minutes > 1 ? "min" : "min "}
+            The sprinkler runs for {state.sprinklerMinutes}{" "}
+            {state.sprinklerMinutes > 1 ? "min" : "min "}
           </Typography>
 
           <br />
@@ -219,7 +225,7 @@ const Sprinkler = ({ classes, theme }) => {
               max={60}
               tipFormatter={e => `${e} min`}
               // tipProps={{ overlayClassName: "tipSlider" }}
-              defaultValue={state.minutes}
+              defaultValue={state.sprinklerMinutes}
               trackStyle={{ backgroundColor: theme.palette.primary.main }}
               handleStyle={{
                 borderColor: theme.palette.primary.main,
@@ -230,13 +236,26 @@ const Sprinkler = ({ classes, theme }) => {
                 backgroundColor: theme.palette.primary.main
               }}
               // railStyle={{ backgroundColor: "red", height: 10 }}
-              onChange={minutes => dispatch({ type: "setMinutes", minutes })}
+              onChange={minutes =>
+                dispatch({ type: "setMinutes", sprinklerMinutes: minutes })
+              }
             />
           </div>
         </div>
       </main>
 
-      <ButtonLink to="/main" variant="contained" fullWidth color="primary">
+      <ButtonLink
+        to="/main"
+        variant="contained"
+        fullWidth
+        color="primary"
+        onClick={() =>
+          updateState({
+            ...state,
+            id: Date.now()
+          })
+        }
+      >
         CREATE ENTRY
       </ButtonLink>
     </div>

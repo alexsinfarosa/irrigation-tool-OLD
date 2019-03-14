@@ -9,6 +9,6 @@ export const main = {
 // location, irrigationDate and sprinkler page
 export const locationRoot = {
   display: "grid",
-  height: `calc(100vh - 45px)`, // HACK.....
-  gridTemplateRows: "60px auto 80px"
+  gridTemplateRows: "60px auto 80px",
+  height: "100vh"
 };

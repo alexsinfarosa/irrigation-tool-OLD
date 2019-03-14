@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "@reach/router";
 
 // context
-import { AppContext } from "./context/appContext";
+import AppContext, { AppProvider } from "./context/appContext";
 
 // components
 import Loading from "./components/Loading";
@@ -28,9 +28,9 @@ import {
 library.add(faHome, faInfoCircle, faThList, faCloud, faChevronLeft);
 
 const App = () => {
-  const [loading, setLoading] = React.useState(false);
+  const { loading } = React.useContext(AppContext);
   return (
-    <AppContext.Provider value={{ loading, setLoading }}>
+    <AppProvider>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         {loading ? (
           <Loading />
@@ -50,7 +50,7 @@ const App = () => {
           </Router>
         )}
       </div>
-    </AppContext.Provider>
+    </AppProvider>
   );
 };
 
