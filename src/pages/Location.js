@@ -32,11 +32,16 @@ const styles = theme => ({
 
 // Initial State ---------------------------
 const initialState = () => {
+  const localStorageRef = window.localStorage.getItem("LIT_location");
+  if (localStorageRef) {
+    return JSON.parse(localStorageRef);
+  }
   return {
     address: "",
     lat: null,
     lng: null,
-    streetNumber: null
+    streetNumber: null,
+    isStreetNumberRequired: false
   };
 };
 
@@ -49,12 +54,18 @@ function reducer(state, action) {
       return { ...state, lat: action.lat, lng: action.lng };
     case "setStreetNumber":
       return { ...state, streetNumber: action.streetNumber };
+    case "toggleIsStreetNumberRequired":
+      return {
+        ...state,
+        isStreetNumberRequired: !state.isStreetNumberRequired
+      };
     case "reset":
       return {
         address: "",
         lat: null,
         lng: null,
-        streetNumber: null
+        streetNumber: null,
+        isStreetNumberRequired: false
       };
     default:
       throw new Error();
@@ -67,8 +78,11 @@ const Location = ({ classes, theme }) => {
 
   // STATE ------------------------------------------------
   const [state, dispatch] = React.useReducer(reducer, initialState());
-  const [hasStreetNumber, toggleHasStreetNumber] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
+
+  React.useEffect(() => {
+    window.localStorage.setItem("LIT_location", JSON.stringify(state));
+  }, [state]);
 
   // Handle address change --------------------------------
   const handleAddressChange = address => {
@@ -86,12 +100,12 @@ const Location = ({ classes, theme }) => {
   };
 
   // Click on one of the suggested addresses of the list
-  const handleSelectAdress = address => {
+  const handleSelectAddress = address => {
     dispatch({ type: "setAddress", address });
     geocodeByAddress(address)
       .then(results => {
         const formattedAddress = results[0].formatted_address;
-        if (hasStreetNumber) {
+        if (state.isStreetNumberRequired) {
           determineStreetNumber(formattedAddress);
         }
         return getLatLng(results[0]);
@@ -133,9 +147,14 @@ const Location = ({ classes, theme }) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={hasStreetNumber}
+                checked={state.isStreetNumberRequired}
                 color="primary"
-                onChange={() => toggleHasStreetNumber(!hasStreetNumber)}
+                onChange={() => {
+                  dispatch({ type: "toggleIsStreetNumberRequired" });
+                  dispatch({ type: "setAddress", address: "" });
+                  dispatch({ type: "setLatLng", lat: null, lng: null });
+                  dispatch({ type: "setStreetNumber", streetNumber: null });
+                }}
               />
             }
             label="My street number follows the odd/even irrigation ordinance"
@@ -146,7 +165,7 @@ const Location = ({ classes, theme }) => {
         <PlacesAutocomplete
           value={state.address}
           onChange={handleAddressChange}
-          onSelect={handleSelectAdress}
+          onSelect={handleSelectAddress}
           shouldFetchSuggestions={state.address.length > 2}
           onError={handleError}
         >

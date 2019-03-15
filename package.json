@@ -1,6 +1,9 @@
 {
-  "name": "irrigation-tool-v4",
+  "name": "lawn-irrigation-tool",
   "version": "0.1.0",
+  "author": "alexsinfarosa <as898@cornell.edu>",
+  "homepage": "https://alexsinfarosa.github.io/irrigation-tool/",
+  "description": "Lawn Irrigation Tool",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.1.0",
@@ -12,6 +15,7 @@
     "@material-ui/core": "^3.9.2",
     "@reach/router": "^1.2.1",
     "date-fns": "^2.0.0-alpha.27",
+    "gh-pages": "^2.0.1",
     "hide-virtual-keyboard": "^1.0.1",
     "material-ui-pickers": "^2.2.4",
     "rc-slider": "^8.6.7",
@@ -25,6 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
