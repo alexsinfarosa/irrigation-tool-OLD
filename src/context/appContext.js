@@ -10,9 +10,16 @@ const AppProvider = ({ children }) => {
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
   const [lawns, setLawns] = React.useState(initialLawns);
 
+  // React.useEffect(() => {
+  //   console.log("lawns changed");
+  //   window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
+  // }, [lawns]);
+
   // Initial State ---------------------------
   const initialState = () => {
+    console.log("initialState CALLED!");
     if (lawns.length > 0) {
+      console.log("first lawn from the list");
       return lawns[0];
     }
     return {
@@ -34,9 +41,18 @@ const AppProvider = ({ children }) => {
   };
 
   const [state, setState] = useState(initialState);
-  const updateState = updatedState => setState({ ...state, ...updatedState });
+  const updateState = updatedState =>
+    setState(prevState => ({ ...prevState, ...updatedState }));
 
-  console.log(state, lawns);
+  // CRUD ---------------------------------
+  const addLawn = () => {
+    console.log("ADDED THE FUCKIN LAWN");
+    updateState({ id: Date.now() });
+    setLawns([state, ...lawns]);
+    window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
+  };
+
+  console.log(state);
 
   return (
     <AppContext.Provider
@@ -46,7 +62,8 @@ const AppProvider = ({ children }) => {
         state,
         updateState,
         lawns,
-        setLawns
+        setLawns,
+        addLawn
       }}
     >
       {children}
