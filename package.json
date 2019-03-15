@@ -2,7 +2,7 @@
   "name": "lawn-irrigation-tool",
   "version": "0.1.0",
   "author": "alexsinfarosa <as898@cornell.edu>",
-  "homepage": "https://alexsinfarosa.github.io/irrigation-tool/",
+  "homepage": "https://alexsinfarosa.github.io/lawn-irrigation-tool/",
   "description": "Lawn Irrigation Tool",
   "private": true,
   "dependencies": {
