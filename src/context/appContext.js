@@ -3,23 +3,22 @@ import React, { createContext, useState } from "react";
 const AppContext = createContext({});
 
 const AppProvider = ({ children }) => {
+  console.log("AppProvider");
   // STATE ------------------------------------------------
   const [loading, setLoading] = useState(false);
 
   const initialLawns = () =>
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
-  const [lawns, setLawns] = React.useState(initialLawns);
+  const [lawns, setLawns] = useState(initialLawns);
 
-  // React.useEffect(() => {
-  //   console.log("lawns changed");
-  //   window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
-  // }, [lawns]);
+  React.useEffect(() => {
+    console.log("lawns changed");
+    window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
+  }, [lawns]);
 
-  // Initial State ---------------------------
+  // Initial State -----------------------------------------
   const initialState = () => {
-    console.log("initialState CALLED!");
     if (lawns.length > 0) {
-      console.log("first lawn from the list");
       return lawns[0];
     }
     return {
@@ -40,27 +39,29 @@ const AppProvider = ({ children }) => {
     };
   };
 
-  const [state, setState] = useState(initialState);
-  const updateState = updatedState =>
-    setState(prevState => ({ ...prevState, ...updatedState }));
-
-  // CRUD ---------------------------------
-  const addLawn = () => {
-    console.log("ADDED THE FUCKIN LAWN");
-    updateState({ id: Date.now() });
-    setLawns([state, ...lawns]);
-    window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
+  const [lawn, setLawn] = useState(initialState);
+  const updateLawn = updatedState => {
+    setLawn(prevState => {
+      return { ...prevState, ...updatedState };
+    });
   };
 
-  console.log(state);
+  // CRUD ------------------------------------------------
+  const addLawn = newLawn => {
+    const updatedLawn = { ...lawn, ...newLawn };
+    updateLawn(newLawn);
+    const updatedLawns = [updatedLawn, ...lawns];
+    setLawns(updatedLawns);
+  };
 
   return (
     <AppContext.Provider
       value={{
         loading,
         setLoading,
-        state,
-        updateState,
+        updateLawn,
+        lawn,
+        setLawn,
         lawns,
         setLawns,
         addLawn

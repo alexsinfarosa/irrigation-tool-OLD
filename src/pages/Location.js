@@ -73,8 +73,9 @@ function reducer(state, action) {
 }
 
 const Location = ({ classes, theme }) => {
+  console.log("Location");
   // CONTEXT -----------------------------------------------
-  const { updateState } = React.useContext(AppContext);
+  const { updateLawn } = React.useContext(AppContext);
 
   // STATE ------------------------------------------------
   const [state, dispatch] = React.useReducer(reducer, initialState());
@@ -262,7 +263,7 @@ const Location = ({ classes, theme }) => {
           variant="contained"
           fullWidth
           color="primary"
-          onClick={() => updateState(state)}
+          onClick={() => updateLawn(state)}
         >
           Continue
         </ButtonLink>

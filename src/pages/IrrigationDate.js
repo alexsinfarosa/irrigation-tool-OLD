@@ -21,8 +21,9 @@ const styles = theme => ({
 });
 
 const IrrigationDate = ({ classes }) => {
+  console.log("IrrigationDate");
   // CONTEXT ---------------------------------------------------
-  const { updateState } = React.useContext(AppContext);
+  const { updateLawn } = React.useContext(AppContext);
 
   // State ---------------------------------------------------
   const thisYear = new Date().getFullYear();
@@ -71,7 +72,7 @@ const IrrigationDate = ({ classes }) => {
         variant="contained"
         fullWidth
         color="primary"
-        onClick={() => updateState(irrigationDate)}
+        onClick={() => updateLawn(irrigationDate)}
       >
         Continue
       </ButtonLink>

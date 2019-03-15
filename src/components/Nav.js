@@ -44,7 +44,6 @@ const NavLink = props => (
 
 const Nav = ({ classes, theme }) => {
   const [value, setValue] = React.useState("home");
-  console.log(value);
   function handleChange(event, newValue) {
     setValue(newValue);
   }

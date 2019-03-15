@@ -134,8 +134,9 @@ function reducer(state, action) {
 }
 
 const Sprinkler = ({ classes, theme }) => {
+  console.log("Sprinkler");
   // CONTEXT ------------------------------------------
-  const { updateState, addLawn } = React.useContext(AppContext);
+  const { updateLawn, addLawn } = React.useContext(AppContext);
   // State --------------------------------------------
   const [state, dispatch] = React.useReducer(reducer, initialState());
 
@@ -250,8 +251,7 @@ const Sprinkler = ({ classes, theme }) => {
         fullWidth
         color="primary"
         onClick={() => {
-          updateState(state);
-          addLawn();
+          addLawn({ ...state, id: Date.now() });
         }}
       >
         CREATE ENTRY

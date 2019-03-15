@@ -23,9 +23,19 @@ import {
   faHome,
   faInfoCircle,
   faThList,
-  faCloud
+  faCloud,
+  faEllipsisH
 } from "@fortawesome/pro-light-svg-icons";
-library.add(faHome, faInfoCircle, faThList, faCloud, faChevronLeft);
+import { faTint } from "@fortawesome/pro-solid-svg-icons";
+library.add(
+  faHome,
+  faInfoCircle,
+  faThList,
+  faCloud,
+  faChevronLeft,
+  faTint,
+  faEllipsisH
+);
 
 const App = () => {
   const { loading } = React.useContext(AppContext);
