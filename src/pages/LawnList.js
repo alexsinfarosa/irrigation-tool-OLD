@@ -15,6 +15,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 // components
 import Nav from "../components/Nav";
+import Logos from "../components/Logos";
 
 // common styles
 import { pageWrapper, main } from "../styles/common";
@@ -49,6 +50,8 @@ const LawnList = ({ classes }) => {
   return (
     <div className={classes.pageWrapper}>
       <main className={classes.main}>
+        <Logos />
+        <div style={{ marginBottom: 32 }} />
         {lawns.map(l => {
           const isSelected = l.id === lawn.id;
           return (

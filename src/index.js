@@ -8,11 +8,15 @@ import * as serviceWorker from "./serviceWorker";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
+import { AppProvider } from "./context/appContext";
+
 function Root() {
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <App />
-    </MuiPickersUtilsProvider>
+    <AppProvider>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <App />
+      </MuiPickersUtilsProvider>
+    </AppProvider>
   );
 }
 

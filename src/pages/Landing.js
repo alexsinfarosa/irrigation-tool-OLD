@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 // components
 import ButtonLink from "../components/ButtonLink";
+import Logos from "../components/Logos";
 
 const styles = theme => ({
   root: {
@@ -90,6 +91,17 @@ const Landing = ({ classes }) => {
       >
         Get Started
       </ButtonLink>
+
+      <div
+        style={{
+          width: "100%",
+          paddingLeft: 16,
+          paddingRight: 16,
+          marginTop: "20%"
+        }}
+      >
+        <Logos />
+      </div>
     </div>
   );
 };

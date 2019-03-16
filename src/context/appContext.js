@@ -6,17 +6,23 @@ const AppContext = createContext({});
 const AppProvider = ({ children }) => {
   console.log("AppProvider");
   // STATE ------------------------------------------------
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // path
   const path = window.location.pathname.split("/");
   const tab = path[path.length - 1];
-  console.log(tab);
   const [navPath, setNavPath] = useState(tab);
 
   const initialLawns = () =>
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
   const [lawns, setLawns] = useState(initialLawns);
+
+  React.useEffect(() => {
+    if (lawns.length !== 0) {
+      navigate("/main");
+    }
+    setLoading(false);
+  }, []);
 
   React.useEffect(() => {
     if (lawns.length === 0) {

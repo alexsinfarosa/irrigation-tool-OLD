@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "@reach/router";
 
 // context
-import AppContext, { AppProvider } from "./context/appContext";
+import AppContext from "./context/appContext";
 
 // components
 import Loading from "./components/Loading";
@@ -52,27 +52,25 @@ library.add(
 const App = () => {
   const { loading } = React.useContext(AppContext);
   return (
-    <AppProvider>
-      <div style={{ maxWidth: 640, margin: "0 auto" }}>
-        {loading ? (
-          <Loading />
-        ) : (
-          <Router>
-            <Landing path="/" />
-            <Location path="location" />
-            <IrrigationDate path="irrigationDate" />
-            <Sprinkler path="sprinkler" />
+    <div style={{ maxWidth: 640, margin: "0 auto" }}>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Router>
+          <Landing path="/" />
+          <Location path="location" />
+          <IrrigationDate path="irrigationDate" />
+          <Sprinkler path="sprinkler" />
 
-            <Main path="main">
-              <Info path="info" />
-              <Lawn path="/" />
-              <Forecast path="forecast" />
-              <LawnList path="lawns" />
-            </Main>
-          </Router>
-        )}
-      </div>
-    </AppProvider>
+          <Main path="main">
+            <Info path="info" />
+            <Lawn path="/" />
+            <Forecast path="forecast" />
+            <LawnList path="lawns" />
+          </Main>
+        </Router>
+      )}
+    </div>
   );
 };
 
