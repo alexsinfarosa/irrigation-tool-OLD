@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles, withTheme } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 
 // common styles
 import { main } from "../styles/common";
@@ -15,9 +15,7 @@ const Lawn = ({ classes }) => {
   const { lawn } = React.useContext(AppContext);
   return (
     <div className={classes.main}>
-      <Typography variant="h5" gutterBottom>
-        <pre>{JSON.stringify(lawn, null, 4)}</pre>
-      </Typography>
+      <pre>{JSON.stringify(lawn, null, 2)}</pre>
     </div>
   );
 };

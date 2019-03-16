@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { navigate } from "@reach/router";
 
 const AppContext = createContext({});
 
@@ -7,13 +8,27 @@ const AppProvider = ({ children }) => {
   // STATE ------------------------------------------------
   const [loading, setLoading] = useState(false);
 
+  // path
+  const path = window.location.pathname.split("/");
+  const tab = path[path.length - 1];
+  console.log(tab);
+  const [navPath, setNavPath] = useState(tab);
+
   const initialLawns = () =>
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
   const [lawns, setLawns] = useState(initialLawns);
 
   React.useEffect(() => {
-    console.log("lawns changed");
-    window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
+    if (lawns.length === 0) {
+      navigate("/");
+      window.localStorage.removeItem("lawn-irrigation-tool");
+      window.localStorage.removeItem("LIT_location");
+    } else {
+      window.localStorage.setItem(
+        "lawn-irrigation-tool",
+        JSON.stringify(lawns)
+      );
+    }
   }, [lawns]);
 
   // Initial State -----------------------------------------
@@ -58,6 +73,8 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         loading,
+        navPath,
+        setNavPath,
         setLoading,
         updateLawn,
         lawn,

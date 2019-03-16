@@ -34,7 +34,9 @@ const styles = theme => ({
 });
 
 const LawnList = ({ classes }) => {
-  const { lawns, lawn, setLawn, setLawns } = React.useContext(AppContext);
+  const { lawns, lawn, setLawn, setLawns, setNavPath } = React.useContext(
+    AppContext
+  );
 
   // STATE ----------------------------------------------
   const [isDialog, setIsDialog] = React.useState(false);
@@ -53,14 +55,14 @@ const LawnList = ({ classes }) => {
             <Paper
               key={l.id}
               className={classes.paper}
-              elevation={isSelected ? 8 : 0}
+              elevation={isSelected ? 4 : 1}
             >
               <List component="nav">
                 <ListItem
                   onClick={() => {
                     setLawn(l);
-                    setLawnId(l.id);
-                    navigate("./");
+                    navigate("/main");
+                    setNavPath("main");
                   }}
                 >
                   {true ? (
@@ -81,6 +83,7 @@ const LawnList = ({ classes }) => {
                     <IconButton
                       aria-label="ellipsis"
                       onClick={() => {
+                        setLawnId(l.id);
                         setIsDialog(true);
                       }}
                       style={{ marginRight: 8 }}

@@ -136,7 +136,7 @@ function reducer(state, action) {
 const Sprinkler = ({ classes, theme }) => {
   console.log("Sprinkler");
   // CONTEXT ------------------------------------------
-  const { updateLawn, addLawn } = React.useContext(AppContext);
+  const { addLawn } = React.useContext(AppContext);
   // State --------------------------------------------
   const [state, dispatch] = React.useReducer(reducer, initialState());
 

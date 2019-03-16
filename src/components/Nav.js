@@ -9,6 +9,7 @@ import { Link } from "@reach/router";
 
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AppContext from "../context/appContext";
 
 const styles = theme => ({
   root: {
@@ -43,14 +44,14 @@ const NavLink = props => (
 );
 
 const Nav = ({ classes, theme }) => {
-  const [value, setValue] = React.useState("home");
+  const { navPath, setNavPath } = React.useContext(AppContext);
   function handleChange(event, newValue) {
-    setValue(newValue);
+    setNavPath(newValue);
   }
 
   return (
     <BottomNavigation
-      value={value}
+      value={navPath}
       onChange={handleChange}
       showLabels
       className={classes.root}
@@ -68,7 +69,7 @@ const Nav = ({ classes, theme }) => {
 
       <BottomNavigationAction
         label="Home"
-        value="home"
+        value="main"
         icon={
           <NavLink to="./" theme={theme}>
             <FontAwesomeIcon icon={["fal", "home"]} size="2x" />
