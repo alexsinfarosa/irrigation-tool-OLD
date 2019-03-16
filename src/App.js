@@ -20,13 +20,20 @@ import LawnList from "./pages/LawnList";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faChevronLeft } from "@fortawesome/pro-solid-svg-icons";
 import {
+  faHome as falHome,
+  faInfoCircle as falInfoCircle,
+  faThList as falThList,
+  faCloud as falCloud,
+  faEllipsisH as falEllipsisH
+} from "@fortawesome/pro-light-svg-icons";
+import {
+  faTint,
   faHome,
   faInfoCircle,
   faThList,
   faCloud,
   faEllipsisH
-} from "@fortawesome/pro-light-svg-icons";
-import { faTint } from "@fortawesome/pro-solid-svg-icons";
+} from "@fortawesome/pro-solid-svg-icons";
 library.add(
   faHome,
   faInfoCircle,
@@ -34,7 +41,12 @@ library.add(
   faCloud,
   faChevronLeft,
   faTint,
-  faEllipsisH
+  faEllipsisH,
+  falHome,
+  falInfoCircle,
+  falThList,
+  falCloud,
+  falEllipsisH
 );
 
 const App = () => {
