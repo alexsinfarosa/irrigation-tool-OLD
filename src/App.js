@@ -24,7 +24,8 @@ import {
   faInfoCircle as falInfoCircle,
   faThList as falThList,
   faCloud as falCloud,
-  faEllipsisH as falEllipsisH
+  faEllipsisH as falEllipsisH,
+  faPlusCircle
 } from "@fortawesome/pro-light-svg-icons";
 import {
   faTint,
@@ -46,7 +47,8 @@ library.add(
   falInfoCircle,
   falThList,
   falCloud,
-  falEllipsisH
+  falEllipsisH,
+  faPlusCircle
 );
 
 const App = () => {

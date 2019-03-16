@@ -20,6 +20,7 @@ const AppProvider = ({ children }) => {
   React.useEffect(() => {
     if (lawns.length !== 0) {
       navigate("/main");
+      setNavPath("main");
     }
     setLoading(false);
   }, []);

@@ -26,22 +26,24 @@ const styles = theme => ({
   }
 });
 
-const NavLink = props => (
-  <Link
-    {...props}
-    getProps={({ isCurrent }) => {
-      // the object returned here is passed to the
-      // anchor element's props
-      return {
-        style: {
-          color: isCurrent
-            ? props.theme.palette.primary.main
-            : props.theme.palette.grey["700"]
-        }
-      };
-    }}
-  />
-);
+const NavLink = props => {
+  return (
+    <Link
+      {...props}
+      getProps={({ isCurrent }) => {
+        // the object returned here is passed to the
+        // anchor element's props
+        return {
+          style: {
+            color: isCurrent
+              ? props.theme.palette.primary.main
+              : props.theme.palette.grey["700"]
+          }
+        };
+      }}
+    />
+  );
+};
 
 const Nav = ({ classes, theme }) => {
   const { navPath, setNavPath } = React.useContext(AppContext);

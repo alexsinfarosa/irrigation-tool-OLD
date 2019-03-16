@@ -16,6 +16,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 // components
 import Nav from "../components/Nav";
 import Logos from "../components/Logos";
+import ButtonLink from "../components/ButtonLink";
 
 // common styles
 import { pageWrapper, main } from "../styles/common";
@@ -34,7 +35,7 @@ const styles = theme => ({
   }
 });
 
-const LawnList = ({ classes }) => {
+const LawnList = ({ classes, theme }) => {
   const { lawns, lawn, setLawn, setLawns, setNavPath } = React.useContext(
     AppContext
   );
@@ -51,7 +52,11 @@ const LawnList = ({ classes }) => {
     <div className={classes.pageWrapper}>
       <main className={classes.main}>
         <Logos />
-        <div style={{ marginBottom: 32 }} />
+        <div style={{ margin: "24px auto", textAlign: "center" }}>
+          <ButtonLink to="/location" color="primary" variant="outlined">
+            New Entry
+          </ButtonLink>
+        </div>
         {lawns.map(l => {
           const isSelected = l.id === lawn.id;
           return (

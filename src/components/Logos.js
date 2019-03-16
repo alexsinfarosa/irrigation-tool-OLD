@@ -18,7 +18,7 @@ const Logos = () => {
       <div>
         <img
           src={water}
-          alt="water"
+          alt="NY American Water Logo"
           style={{
             display: "block",
             width: 130,
