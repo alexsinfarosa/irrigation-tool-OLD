@@ -35,7 +35,7 @@ const NavLink = props => (
       return {
         style: {
           color: isCurrent
-            ? props.theme.palette.grey["700"]
+            ? props.theme.palette.primary.main
             : props.theme.palette.grey["700"]
         }
       };
@@ -45,7 +45,6 @@ const NavLink = props => (
 
 const Nav = ({ classes, theme }) => {
   const { navPath, setNavPath } = React.useContext(AppContext);
-  console.log(navPath);
   function handleChange(event, newValue) {
     setNavPath(newValue);
   }
@@ -63,17 +62,12 @@ const Nav = ({ classes, theme }) => {
         icon={
           <NavLink to="info" theme={theme}>
             {navPath === "info" ? (
-              <FontAwesomeIcon
-                icon={["fa", "info-circle"]}
-                size="2x"
-                color={theme.palette.primary.main}
-              />
+              <FontAwesomeIcon icon={["fa", "info-circle"]} size="2x" />
             ) : (
               <FontAwesomeIcon icon={["fal", "info-circle"]} size="2x" />
             )}
           </NavLink>
         }
-        // onClick={() => navigate("info")}
       />
 
       <BottomNavigationAction
@@ -82,11 +76,7 @@ const Nav = ({ classes, theme }) => {
         icon={
           <NavLink to="./" theme={theme}>
             {navPath === "main" || navPath === "" ? (
-              <FontAwesomeIcon
-                icon={["fa", "home"]}
-                size="2x"
-                color={theme.palette.primary.main}
-              />
+              <FontAwesomeIcon icon={["fa", "home"]} size="2x" />
             ) : (
               <FontAwesomeIcon icon={["fal", "home"]} size="2x" />
             )}
@@ -99,11 +89,7 @@ const Nav = ({ classes, theme }) => {
         icon={
           <NavLink to="forecast" theme={theme}>
             {navPath === "forecast" ? (
-              <FontAwesomeIcon
-                icon={["fa", "cloud"]}
-                size="2x"
-                color={theme.palette.primary.main}
-              />
+              <FontAwesomeIcon icon={["fa", "cloud"]} size="2x" />
             ) : (
               <FontAwesomeIcon icon={["fal", "cloud"]} size="2x" />
             )}
@@ -116,11 +102,7 @@ const Nav = ({ classes, theme }) => {
         icon={
           <NavLink to="lawns" theme={theme}>
             {navPath === "lawns" ? (
-              <FontAwesomeIcon
-                icon={["fa", "th-list"]}
-                size="2x"
-                color={theme.palette.primary.main}
-              />
+              <FontAwesomeIcon icon={["fa", "th-list"]} size="2x" />
             ) : (
               <FontAwesomeIcon icon={["fal", "th-list"]} size="2x" />
             )}
