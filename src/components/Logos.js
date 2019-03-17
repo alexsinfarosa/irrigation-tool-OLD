@@ -1,7 +1,6 @@
 import React from "react";
 import { ReactComponent as NRCCLogo } from "../images/nrcc-logo.svg";
-
-import water from "../images/ny-american-water-logo.png";
+import { ReactComponent as WaterLogo } from "../images/AW-NEW YORK_PMS.svg";
 
 const Logos = () => {
   return (
@@ -15,16 +14,8 @@ const Logos = () => {
       <div>
         <NRCCLogo />
       </div>
-      <div>
-        <img
-          src={water}
-          alt="NY American Water Logo"
-          style={{
-            display: "block",
-            width: 130,
-            height: "auto"
-          }}
-        />
+      <div style={{ width: 130 }}>
+        <WaterLogo />
       </div>
     </div>
   );
