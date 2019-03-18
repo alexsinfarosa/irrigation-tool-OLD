@@ -18,7 +18,7 @@ import AppContext from "../context/appContext";
 
 const styles = theme => ({
   root: {
-    // padding: "16px 0"
+    // padding: "16px 0",
   }
 });
 
@@ -263,7 +263,7 @@ const BarChartDeficit = React.memo(({ classes, theme }) => {
     <div className={classes.root}>
       <BarChart
         layout="vertical"
-        width={window.innerWidth}
+        width={window.innerWidth > 500 ? 500 : window.innerWidth}
         height={window.innerHeight < 500 ? 500 : window.innerHeight - 165}
         data={lastDays}
         maxBarSize={16}

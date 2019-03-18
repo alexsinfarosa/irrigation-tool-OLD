@@ -22,7 +22,8 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 8
+    padding: 8,
+    marginBottom: 8
   },
   forecastList: {
     marginBottom: 32
