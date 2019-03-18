@@ -88,11 +88,13 @@ const AppProvider = ({ children }) => {
   // CRUD ------------------------------------------------
   const addLawn = async newLawn => {
     const updatedLawn = { ...lawn, ...newLawn };
-    const forecast = fetchForecast();
+    const forecast = await fetchForecast();
     updateLawn(newLawn, forecast);
 
     const updatedLawns = [updatedLawn, ...lawns];
     setLawns(updatedLawns);
+    setNavPath("main");
+    window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
   };
 
   return (

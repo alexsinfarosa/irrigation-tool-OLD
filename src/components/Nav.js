@@ -50,7 +50,7 @@ const Nav = ({ classes, theme }) => {
   function handleChange(event, newValue) {
     setNavPath(newValue);
   }
-
+  console.log(navPath);
   return (
     <BottomNavigation
       value={navPath === "" ? "main" : navPath}

@@ -25,7 +25,17 @@ import {
   faThList as falThList,
   faCloud as falCloud,
   faEllipsisH as falEllipsisH,
-  faPlusCircle
+  faPlusCircle,
+  faMoon as fasMoon,
+  faFog as fasFog,
+  faWind as fasWind,
+  faCloudSun as fasCloudSun,
+  faCloudMoon as fasCloudMoon,
+  faSnowflakes as fasSnowflakes,
+  faCloudSleet as fasCloudSleet,
+  faClouds as fasClouds,
+  faSun as fasSun,
+  faCloudRain as falCloudRain
 } from "@fortawesome/pro-light-svg-icons";
 import {
   faTint,
@@ -33,7 +43,18 @@ import {
   faInfoCircle,
   faThList,
   faCloud,
-  faEllipsisH
+  faEllipsisH,
+  faMoon,
+  faFog,
+  faWind,
+  faCloudSun,
+  faCloudMoon,
+  faSnowflakes,
+  faCloudSleet,
+  faClouds,
+  faSun,
+  faCloudRain,
+  faRaindrops
 } from "@fortawesome/pro-solid-svg-icons";
 library.add(
   faHome,
@@ -48,7 +69,28 @@ library.add(
   falThList,
   falCloud,
   falEllipsisH,
-  faPlusCircle
+  faPlusCircle,
+  fasMoon,
+  fasFog,
+  fasWind,
+  fasCloudSun,
+  fasCloudMoon,
+  fasSnowflakes,
+  fasCloudSleet,
+  fasClouds,
+  fasSun,
+  falCloudRain,
+  faMoon,
+  faFog,
+  faWind,
+  faCloudSun,
+  faCloudMoon,
+  faSnowflakes,
+  faCloudSleet,
+  faClouds,
+  faSun,
+  faCloudRain,
+  faRaindrops
 );
 
 const App = () => {
