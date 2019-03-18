@@ -30,9 +30,7 @@ import { navigate } from "@reach/router";
 const styles = theme => ({
   pageWrapper: { ...pageWrapper },
   main: { ...main },
-  paper: {
-    marginBottom: "24px"
-  }
+  paper: { marginBottom: "24px" }
 });
 
 const LawnList = ({ classes, theme }) => {

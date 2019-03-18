@@ -8,10 +8,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 // common styles
-import { main } from "../styles/common";
+import { pageWrapper, main } from "../styles/common";
 import AppContext from "../context/appContext";
 
 const styles = theme => ({
+  pageWrapper: { ...pageWrapper },
   main: { ...main }
 });
 
@@ -20,56 +21,58 @@ const Lawn = ({ classes }) => {
   const [isDialog, setIsDialog] = React.useState(false);
 
   return (
-    <div className={classes.main}>
-      <pre>{JSON.stringify(lawn, null, 2)}</pre>
+    <div className={classes.pageWrapper}>
+      <main className={classes.main}>
+        <pre>{JSON.stringify(lawn, null, 2)}</pre>
 
-      <Dialog
-        open={isDialog}
-        onClose={() => setIsDialog(false)}
-        aria-labelledby="alert-dialog-information-about-app"
-        aria-describedby="alert-dialog-how-to-use-app"
-        hideBackdrop={true}
-      >
-        <DialogTitle id="alert-dialog-title">
-          <Typography variant="body1" gutterBottom>
-            First
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea
-            corporis delectus laborum eaque odit ex perferendis! Pariatur totam
-            harum numquam nostrum eos, delectus quo enim velit at nemo,
-            blanditiis expedita?
-          </Typography>
+        <Dialog
+          open={isDialog}
+          onClose={() => setIsDialog(false)}
+          aria-labelledby="alert-dialog-information-about-app"
+          aria-describedby="alert-dialog-how-to-use-app"
+          hideBackdrop={true}
+        >
+          <DialogTitle id="alert-dialog-title">
+            <Typography variant="body1" gutterBottom>
+              First
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea
+              corporis delectus laborum eaque odit ex perferendis! Pariatur
+              totam harum numquam nostrum eos, delectus quo enim velit at nemo,
+              blanditiis expedita?
+            </Typography>
 
-          <br />
-          <Typography variant="body1" gutterBottom>
-            Second
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt
-            molestias quo nisi. Corrupti dolore, explicabo sapiente adipisci
-            quibusdam pariatur voluptate eum cumque, reprehenderit laboriosam
-            inventore exercitationem iusto aliquid accusantium illo.
-          </Typography>
+            <br />
+            <Typography variant="body1" gutterBottom>
+              Second
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt
+              molestias quo nisi. Corrupti dolore, explicabo sapiente adipisci
+              quibusdam pariatur voluptate eum cumque, reprehenderit laboriosam
+              inventore exercitationem iusto aliquid accusantium illo.
+            </Typography>
 
-          <br />
-          <Typography variant="body1" gutterBottom>
-            Third
-          </Typography>
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-            dolore esse minima obcaecati, consectetur, earum ea qui deserunt
-            omnis dolorum ipsam blanditiis voluptas voluptatem quam quas neque
-            officia, temporibus aspernatur.
-          </Typography>
-        </DialogTitle>
+            <br />
+            <Typography variant="body1" gutterBottom>
+              Third
+            </Typography>
+            <Typography variant="body2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
+              dolore esse minima obcaecati, consectetur, earum ea qui deserunt
+              omnis dolorum ipsam blanditiis voluptas voluptatem quam quas neque
+              officia, temporibus aspernatur.
+            </Typography>
+          </DialogTitle>
 
-        <DialogActions>
-          <Button color="secondary" onClick={() => setIsDialog(false)}>
-            OK!
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <DialogActions>
+            <Button color="secondary" onClick={() => setIsDialog(false)}>
+              OK!
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </main>
     </div>
   );
 };

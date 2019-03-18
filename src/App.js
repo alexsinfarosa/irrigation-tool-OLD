@@ -1,8 +1,13 @@
 import React from "react";
 import { Router } from "@reach/router";
+import { withStyles, withTheme } from "@material-ui/core/styles";
+import withRoot from "./withRoot";
 
 // context
 import AppContext from "./context/appContext";
+
+// common styles
+import { mainContainer } from "./styles/common";
 
 // components
 import Loading from "./components/Loading";
@@ -93,10 +98,14 @@ library.add(
   faRaindrops
 );
 
-const App = () => {
+const styles = () => ({
+  mainContainer: { ...mainContainer }
+});
+
+const App = ({ classes }) => {
   const { loading } = React.useContext(AppContext);
   return (
-    <div style={{ maxWidth: 640, margin: "0 auto", height: "100%" }}>
+    <div className={classes.mainContainer}>
       {loading ? (
         <Loading />
       ) : (
@@ -118,4 +127,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withRoot(withStyles(styles)(withTheme()(App)));

@@ -78,7 +78,7 @@ const Forecast = ({ classes, theme }) => {
 
         <div
           style={{
-            margin: "0 -32px 32px -32px"
+            margin: "0 -16px 32px -16px"
           }}
         >
           <Typography
