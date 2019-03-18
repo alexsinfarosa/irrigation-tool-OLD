@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Nav from "../components/Nav";
 
 // common styles
-import { pageWrapper, main } from "../styles/common";
+import { main, footer } from "../styles/common";
 
 // utils
 import { mapIcon } from "../utils/mapIcon";
@@ -16,8 +16,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppContext from "../context/appContext";
 
 const styles = theme => ({
-  pageWrapper: { ...pageWrapper },
   main: { ...main },
+  footer: { ...footer },
   forecastRow: {
     display: "flex",
     justifyContent: "space-between",
@@ -33,7 +33,7 @@ const Forecast = ({ classes, theme }) => {
   const { lawn } = React.useContext(AppContext);
   const { daily, currently } = lawn.forecast;
   return (
-    <div className={classes.pageWrapper}>
+    <>
       <main className={classes.main}>
         <div
           style={{
@@ -156,7 +156,7 @@ const Forecast = ({ classes, theme }) => {
       </main>
 
       <Nav />
-    </div>
+    </>
   );
 };
 

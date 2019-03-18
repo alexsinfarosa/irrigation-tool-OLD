@@ -114,13 +114,10 @@ const App = ({ classes }) => {
           <Location path="location" />
           <IrrigationDate path="irrigationDate" />
           <Sprinkler path="sprinkler" />
-
-          <Main path="main">
-            <Info path="info" />
-            <Lawn path="/" />
-            <Forecast path="forecast" />
-            <LawnList path="lawns" />
-          </Main>
+          <Info path="info" />
+          <Lawn path="home" />
+          <Forecast path="forecast" />
+          <LawnList path="lawns" />
         </Router>
       )}
     </div>

@@ -21,12 +21,12 @@ const AppProvider = ({ children }) => {
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
   const [lawns, setLawns] = useState(initialLawns);
 
-  console.log(lawns.length);
+  // console.log(lawns.length);
   React.useEffect(() => {
     console.log("useEffect 1");
     if (lawns.length !== 0) {
-      navigate("/main");
-      setNavPath("main");
+      navigate("/home");
+      setNavPath("home");
     }
   }, []);
 
@@ -97,7 +97,7 @@ const AppProvider = ({ children }) => {
 
     const updatedLawns = [updatedLawn, ...lawns];
     setLawns(updatedLawns);
-    setNavPath("main");
+    setNavPath("home");
     window.localStorage.setItem(
       "lawn-irrigation-tool",
       JSON.stringify(updatedLawns)

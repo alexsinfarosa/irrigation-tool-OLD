@@ -7,12 +7,14 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+// components
+import Nav from "../components/Nav";
+
 // common styles
-import { pageWrapper, main } from "../styles/common";
+import { main } from "../styles/common";
 import AppContext from "../context/appContext";
 
 const styles = theme => ({
-  pageWrapper: { ...pageWrapper },
   main: { ...main }
 });
 
@@ -21,7 +23,7 @@ const Lawn = ({ classes }) => {
   const [isDialog, setIsDialog] = React.useState(false);
 
   return (
-    <div className={classes.pageWrapper}>
+    <>
       <main className={classes.main}>
         <pre>{JSON.stringify(lawn, null, 2)}</pre>
 
@@ -73,7 +75,9 @@ const Lawn = ({ classes }) => {
           </DialogActions>
         </Dialog>
       </main>
-    </div>
+
+      <Nav />
+    </>
   );
 };
 

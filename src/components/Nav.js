@@ -13,13 +13,7 @@ import AppContext from "../context/appContext";
 
 const styles = theme => ({
   root: {
-    maxWidth: 640,
-    margin: "0 auto",
     height: 90,
-    position: "fixed",
-    bottom: 0,
-    left: 0,
-    right: 0,
     opacity: 0.95,
     display: "flex",
     alignItems: "flex-start"
@@ -53,7 +47,7 @@ const Nav = ({ classes, theme }) => {
   console.log(navPath);
   return (
     <BottomNavigation
-      value={navPath === "" ? "main" : navPath}
+      value={navPath === "" ? "home" : navPath}
       onChange={handleChange}
       showLabels
       className={classes.root}
@@ -62,7 +56,7 @@ const Nav = ({ classes, theme }) => {
         label="Info"
         value="info"
         icon={
-          <NavLink to="info" theme={theme}>
+          <NavLink to="/info" theme={theme}>
             {navPath === "info" ? (
               <FontAwesomeIcon icon={["fa", "info-circle"]} size="2x" />
             ) : (
@@ -74,10 +68,10 @@ const Nav = ({ classes, theme }) => {
 
       <BottomNavigationAction
         label="Home"
-        value="main"
+        value="home"
         icon={
-          <NavLink to="./" theme={theme}>
-            {navPath === "main" || navPath === "" ? (
+          <NavLink to="/home" theme={theme}>
+            {navPath === "home" || navPath === "" ? (
               <FontAwesomeIcon icon={["fa", "home"]} size="2x" />
             ) : (
               <FontAwesomeIcon icon={["fal", "home"]} size="2x" />
@@ -89,7 +83,7 @@ const Nav = ({ classes, theme }) => {
         label="Forecast"
         value="forecast"
         icon={
-          <NavLink to="forecast" theme={theme}>
+          <NavLink to="/forecast" theme={theme}>
             {navPath === "forecast" ? (
               <FontAwesomeIcon icon={["fa", "cloud"]} size="2x" />
             ) : (
@@ -102,7 +96,7 @@ const Nav = ({ classes, theme }) => {
         label="Lawns"
         value="lawns"
         icon={
-          <NavLink to="lawns" theme={theme}>
+          <NavLink to="/lawns" theme={theme}>
             {navPath === "lawns" ? (
               <FontAwesomeIcon icon={["fa", "th-list"]} size="2x" />
             ) : (

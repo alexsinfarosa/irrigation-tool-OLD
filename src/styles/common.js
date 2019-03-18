@@ -1,33 +1,27 @@
 export const mainContainer = {
-  width: "100%",
-  maxWidth: 640,
-  margin: "0 auto",
-  height: "calc(100vh - 90px)",
-  overflowY: "scroll"
-};
-
-export const pageWrapper = {
-  paddingTop: 16
-  // paddingBottom: 106
-  // background: "pink"
+  height: "100%"
+  // maxWidth: 640,
+  // margin: "0 auto"
 };
 
 export const main = {
-  padding: 16
+  padding: 16,
+  height: "calc(100vh - 90px)",
+  overflow: "auto"
 };
 
-// location, irrigationDate and sprinkler page
-export const locationRoot = {
-  display: "grid",
-  gridTemplateRows: "60px auto 80px",
-  height: "100vh"
+export const footer = {
+  width: "100%",
+  height: 90,
+  position: "fixed",
+  bottom: 0,
+  left: 0,
+  right: 0
 };
 
 export const buttonBig = {
-  paddingLeft: 24,
-  paddingRight: 24,
   fontSize: "1.1rem",
-  height: 80
+  height: "100%"
 };
 
 export const buttonMid = {

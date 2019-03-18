@@ -23,12 +23,12 @@ import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 
 // common styles
-import { locationRoot, main } from "../styles/common";
+import { main, footer } from "../styles/common";
 import AppContext from "../context/appContext";
 
 const styles = theme => ({
-  root: { ...locationRoot },
-  main: { ...main }
+  main: { ...main },
+  footer: { ...footer }
 });
 
 // Initial State ---------------------------
@@ -131,10 +131,9 @@ const Location = ({ classes, theme }) => {
   };
 
   return (
-    <div className={classes.root}>
-      <Header icon="chevron-left" title="Create Location - (step 1/3)" />
-
+    <>
       <main className={classes.main}>
+        <Header icon="chevron-left" title="Create Location - (step 1/3)" />
         <Typography variant="h6" align="center" gutterBottom>
           Enter Your Location
         </Typography>
@@ -258,19 +257,21 @@ const Location = ({ classes, theme }) => {
         </PlacesAutocomplete>
       </main>
 
-      {errorMessage.length === 0 && state.lat && (
-        <ButtonLink
-          to="/irrigationDate"
-          variant="contained"
-          fullWidth
-          color="primary"
-          onClick={() => updateLawn(state)}
-          style={{ ...buttonBig }}
-        >
-          Continue
-        </ButtonLink>
-      )}
-    </div>
+      <div className={classes.footer}>
+        {errorMessage.length === 0 && state.lat && (
+          <ButtonLink
+            to="/irrigationDate"
+            variant="contained"
+            color="primary"
+            onClick={() => updateLawn(state)}
+            fullWidth
+            style={{ ...buttonBig }}
+          >
+            Continue
+          </ButtonLink>
+        )}
+      </div>
+    </>
   );
 };
 

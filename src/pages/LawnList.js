@@ -14,12 +14,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 // components
-import Nav from "../components/Nav";
 import Logos from "../components/Logos";
 import ButtonLink from "../components/ButtonLink";
+import Nav from "../components/Nav";
 
 // common styles
-import { pageWrapper, main, buttonMid } from "../styles/common";
+import { main, footer, buttonMid } from "../styles/common";
 
 // utils
 import format from "date-fns/format";
@@ -28,8 +28,8 @@ import AppContext from "../context/appContext";
 import { navigate } from "@reach/router";
 
 const styles = theme => ({
-  pageWrapper: { ...pageWrapper },
   main: { ...main },
+  footer: { ...footer },
   paper: { marginBottom: "24px" }
 });
 
@@ -52,7 +52,7 @@ const LawnList = ({ classes, theme }) => {
     setLawns(updatedLawns);
   };
   return (
-    <div className={classes.pageWrapper}>
+    <>
       <main className={classes.main}>
         <Logos />
         <div style={{ margin: "24px auto", textAlign: "center" }}>
@@ -146,7 +146,7 @@ const LawnList = ({ classes, theme }) => {
       </Dialog>
 
       <Nav />
-    </div>
+    </>
   );
 };
 

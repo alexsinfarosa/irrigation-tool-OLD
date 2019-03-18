@@ -17,7 +17,7 @@ import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 
 // common styles
-import { locationRoot, main, buttonBig } from "../styles/common";
+import { main, footer, buttonBig } from "../styles/common";
 
 // images
 import SpraySprinkler from "../images/spraySprinkler.png";
@@ -52,8 +52,8 @@ const sprinklers = [
 ];
 
 const styles = theme => ({
-  root: { ...locationRoot },
   main: { ...main },
+  footer: { ...footer },
   containerList: {
     display: "flex",
     flexWrap: "wrap",
@@ -76,11 +76,6 @@ const styles = theme => ({
   titleBar: {
     background:
       "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)"
-  },
-  footer: {
-    padding: 16,
-    paddingTop: 8,
-    paddingBottom: 32
   },
   btnBig: {
     paddingTop: 16,
@@ -160,9 +155,9 @@ const Sprinkler = ({ classes, theme }) => {
   }
 
   return (
-    <div className={classes.root}>
-      <Header icon="chevron-left" title="Sprinkler Type - (step 3/3)" />
+    <>
       <main className={classes.main}>
+        <Header icon="chevron-left" title="Sprinkler Type - (step 3/3)" />
         <div className={classes.padding}>
           <Typography variant="h6" align="center">
             What type of water system do you have?
@@ -245,19 +240,21 @@ const Sprinkler = ({ classes, theme }) => {
         </div>
       </main>
 
-      <ButtonLink
-        to="/main"
-        variant="contained"
-        fullWidth
-        color="primary"
-        onClick={() => {
-          addLawn({ ...state, id: Date.now(), updated: Date.now() });
-        }}
-        style={{ ...buttonBig }}
-      >
-        CREATE ENTRY
-      </ButtonLink>
-    </div>
+      <div className={classes.footer}>
+        <ButtonLink
+          to="/home"
+          variant="contained"
+          fullWidth
+          color="primary"
+          onClick={() => {
+            addLawn({ ...state, id: Date.now(), updated: Date.now() });
+          }}
+          style={{ ...buttonBig }}
+        >
+          CREATE ENTRY
+        </ButtonLink>
+      </div>
+    </>
   );
 };
 

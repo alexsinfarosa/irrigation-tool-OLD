@@ -11,12 +11,12 @@ const styles = theme => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    height: 60
+    height: 60,
+    marginTop: -16
   },
   span: {
     flexGrow: 1,
-    textAlign: "center",
-    padding: 16
+    textAlign: "center"
   }
 });
 

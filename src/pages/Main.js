@@ -6,10 +6,10 @@ import Nav from "../components/Nav";
 
 const Main = ({ children }) => {
   return (
-    <div>
+    <>
       {children}
       <Nav />
-    </div>
+    </>
   );
 };
 

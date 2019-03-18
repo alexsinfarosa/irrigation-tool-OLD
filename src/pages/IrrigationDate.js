@@ -12,12 +12,12 @@ import { DatePicker } from "material-ui-pickers";
 import format from "date-fns/format";
 
 // common styles
-import { buttonBig, locationRoot, main } from "../styles/common";
+import { main, footer, buttonBig } from "../styles/common";
 import AppContext from "../context/appContext";
 
 const styles = theme => ({
-  root: { ...locationRoot },
-  main: { ...main }
+  main: { ...main },
+  footer: { ...footer }
 });
 
 const IrrigationDate = ({ classes }) => {
@@ -40,9 +40,9 @@ const IrrigationDate = ({ classes }) => {
   };
 
   return (
-    <div className={classes.root}>
-      <Header icon="chevron-left" title="Irrigation Date - (step 2/3)" />
+    <>
       <main className={classes.main}>
+        <Header icon="chevron-left" title="Irrigation Date - (step 2/3)" />
         <Typography variant="h6" align="center" gutterBottom>
           When did you last irrigate your lawn?
         </Typography>
@@ -67,17 +67,20 @@ const IrrigationDate = ({ classes }) => {
           />
         </div>
       </main>
-      <ButtonLink
-        to="/sprinkler"
-        variant="contained"
-        fullWidth
-        color="primary"
-        onClick={() => updateLawn(irrigationDate)}
-        style={{ ...buttonBig }}
-      >
-        Continue
-      </ButtonLink>
-    </div>
+
+      <div className={classes.footer}>
+        <ButtonLink
+          to="/sprinkler"
+          variant="contained"
+          fullWidth
+          color="primary"
+          onClick={() => updateLawn(irrigationDate)}
+          style={{ ...buttonBig }}
+        >
+          Continue
+        </ButtonLink>
+      </div>
+    </>
   );
 };
 
