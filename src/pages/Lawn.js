@@ -17,7 +17,7 @@ const styles = theme => ({
 
 const Lawn = ({ classes }) => {
   const { lawn } = React.useContext(AppContext);
-  const [isDialog, setIsDialog] = React.useState(true);
+  const [isDialog, setIsDialog] = React.useState(false);
 
   return (
     <div className={classes.main}>
@@ -31,7 +31,7 @@ const Lawn = ({ classes }) => {
         hideBackdrop={true}
       >
         <DialogTitle id="alert-dialog-title">
-          <Typography variant="headline" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             First
           </Typography>
           <Typography variant="body2" gutterBottom>
@@ -42,7 +42,7 @@ const Lawn = ({ classes }) => {
           </Typography>
 
           <br />
-          <Typography variant="headline" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             Second
           </Typography>
           <Typography variant="body2" gutterBottom>
@@ -53,7 +53,7 @@ const Lawn = ({ classes }) => {
           </Typography>
 
           <br />
-          <Typography variant="headline" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             Third
           </Typography>
           <Typography variant="body2">

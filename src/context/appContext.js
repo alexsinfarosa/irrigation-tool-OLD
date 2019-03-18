@@ -1,12 +1,16 @@
 import React, { createContext, useState } from "react";
 import { navigate } from "@reach/router";
 
+// utils ===========================
+import { fetchForecastData } from "../utils/api";
+import { numberOfHoursLapsed } from "../utils/utils";
+
 const AppContext = createContext({});
 
 const AppProvider = ({ children }) => {
   console.log("AppProvider");
   // STATE ------------------------------------------------
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // path
   const path = window.location.pathname.split("/");
@@ -22,7 +26,6 @@ const AppProvider = ({ children }) => {
       navigate("/main");
       setNavPath("main");
     }
-    setLoading(false);
   }, []);
 
   React.useEffect(() => {
@@ -56,6 +59,7 @@ const AppProvider = ({ children }) => {
       sprinklerRate: 0.05,
       sprinklerMinutes: 20,
       id: null,
+      updated: null,
       forecast: {},
       data: []
     };
@@ -68,10 +72,25 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  async function fetchForecast() {
+    setLoading(true);
+    const forecast = await fetchForecastData(lawn.lat, lawn.lng);
+    updateLawn(forecast);
+    setLoading(false);
+  }
+
+  React.useEffect(() => {
+    const numOfHours = numberOfHoursLapsed(lawn.updated);
+    console.log(numOfHours);
+    fetchForecast();
+  }, []);
+
   // CRUD ------------------------------------------------
-  const addLawn = newLawn => {
+  const addLawn = async newLawn => {
     const updatedLawn = { ...lawn, ...newLawn };
-    updateLawn(newLawn);
+    const forecast = fetchForecast();
+    updateLawn(newLawn, forecast);
+
     const updatedLawns = [updatedLawn, ...lawns];
     setLawns(updatedLawns);
   };

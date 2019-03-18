@@ -251,7 +251,7 @@ const Sprinkler = ({ classes, theme }) => {
         fullWidth
         color="primary"
         onClick={() => {
-          addLawn({ ...state, id: Date.now() });
+          addLawn({ ...state, id: Date.now(), updated: Date.now() });
         }}
       >
         CREATE ENTRY
