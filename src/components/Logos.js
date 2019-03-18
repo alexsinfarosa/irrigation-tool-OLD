@@ -12,10 +12,22 @@ const Logos = () => {
       }}
     >
       <div>
-        <NRCCLogo />
+        <a
+          href="http://www.nrcc.cornell.edu/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <NRCCLogo />
+        </a>
       </div>
       <div style={{ width: 130 }}>
-        <WaterLogo />
+        <a
+          href="https://amwater.com/nyaw/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <WaterLogo />
+        </a>
       </div>
     </div>
   );
