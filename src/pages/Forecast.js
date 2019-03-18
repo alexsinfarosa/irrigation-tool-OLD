@@ -31,7 +31,7 @@ const styles = theme => ({
 
 const Forecast = ({ classes, theme }) => {
   const { lawn } = React.useContext(AppContext);
-  const { daily, currently } = lawn;
+  const { daily, currently } = lawn.forecast;
   return (
     <div className={classes.pageWrapper}>
       <main className={classes.main}>

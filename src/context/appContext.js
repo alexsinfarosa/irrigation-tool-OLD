@@ -3,7 +3,7 @@ import { navigate } from "@reach/router";
 
 // utils ===========================
 import { fetchForecastData } from "../utils/api";
-import { numberOfHoursLapsed } from "../utils/utils";
+// import { numberOfHoursLapsed } from "../utils/utils";
 
 const AppContext = createContext({});
 
@@ -21,7 +21,9 @@ const AppProvider = ({ children }) => {
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
   const [lawns, setLawns] = useState(initialLawns);
 
+  console.log(lawns.length);
   React.useEffect(() => {
+    console.log("useEffect 1");
     if (lawns.length !== 0) {
       navigate("/main");
       setNavPath("main");
@@ -29,11 +31,8 @@ const AppProvider = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
-    if (lawns.length === 0) {
-      navigate("/");
-      window.localStorage.removeItem("lawn-irrigation-tool");
-      window.localStorage.removeItem("LIT_location");
-    } else {
+    console.log("useEffect 2");
+    if (lawns.length !== 0) {
       window.localStorage.setItem(
         "lawn-irrigation-tool",
         JSON.stringify(lawns)
@@ -72,29 +71,38 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  async function fetchForecast() {
-    setLoading(true);
-    const forecast = await fetchForecastData(lawn.lat, lawn.lng);
-    updateLawn(forecast);
-    setLoading(false);
-  }
+  // async function fetchForecast() {
+  //   setLoading(true);
+  //   const forecast = await fetchForecastData(lawn.lat, lawn.lng);
+  //   updateLawn(forecast);
+  //   setLoading(false);
+  // }
 
-  React.useEffect(() => {
-    const numOfHours = numberOfHoursLapsed(lawn.updated);
-    console.log(numOfHours);
-    fetchForecast();
-  }, []);
+  // React.useEffect(() => {
+  //   console.log("useEffect 3");
+  //   const numOfHours = numberOfHoursLapsed(lawn.updated);
+  //   console.log(numOfHours);
+  //   if (false) {
+  //     fetchForecast();
+  //   }
+  // }, []);
 
   // CRUD ------------------------------------------------
   const addLawn = async newLawn => {
-    const updatedLawn = { ...lawn, ...newLawn };
-    const forecast = await fetchForecast();
-    updateLawn(newLawn, forecast);
+    console.log("addLawn");
+    setLoading(true);
+    const forecast = await fetchForecastData(lawn.lat, lawn.lng);
+    const updatedLawn = { ...lawn, ...newLawn, forecast: { ...forecast } };
+    updateLawn(updatedLawn);
 
     const updatedLawns = [updatedLawn, ...lawns];
     setLawns(updatedLawns);
     setNavPath("main");
-    window.localStorage.setItem("lawn-irrigation-tool", JSON.stringify(lawns));
+    window.localStorage.setItem(
+      "lawn-irrigation-tool",
+      JSON.stringify(updatedLawns)
+    );
+    setLoading(false);
   };
 
   return (

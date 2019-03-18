@@ -28,6 +28,48 @@ const Info = ({ classes }) => {
         non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
         impedit, corrupti quo? Asperiores facilis molestias fuga ab!
       </Typography>
+
+      <Typography paragraph gutterBottom>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem nisi
+        non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
+        impedit, corrupti quo? Asperiores facilis molestias fuga ab!
+      </Typography>
+
+      <Typography paragraph gutterBottom>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem nisi
+        non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
+        impedit, corrupti quo? Asperiores facilis molestias fuga ab!
+      </Typography>
+
+      <Typography paragraph gutterBottom>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem nisi
+        non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
+        impedit, corrupti quo? Asperiores facilis molestias fuga ab!
+      </Typography>
+
+      <Typography paragraph gutterBottom>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem nisi
+        non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
+        impedit, corrupti quo? Asperiores facilis molestias fuga ab!
+      </Typography>
+
+      <Typography paragraph gutterBottom>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem nisi
+        non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
+        impedit, corrupti quo? Asperiores facilis molestias fuga ab!
+      </Typography>
+
+      <Typography paragraph gutterBottom>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem nisi
+        non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
+        impedit, corrupti quo? Asperiores facilis molestias fuga ab!
+      </Typography>
+
+      <Typography paragraph gutterBottom>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem nisi
+        non, asperiores sequi animi aut voluptatum fugit qui ea repellendus ab
+        impedit, corrupti quo? Asperiores facilis molestias fuga ab!
+      </Typography>
     </main>
   );
 };

@@ -46,6 +46,11 @@ const LawnList = ({ classes, theme }) => {
 
   const deleteLawn = () => {
     const updatedLawns = lawns.filter(lawn => lawn.id !== lawnId);
+    if (updatedLawns.length === 0) {
+      window.localStorage.removeItem("lawn-irrigation-tool");
+      window.localStorage.removeItem("LIT_location");
+      navigate("/");
+    }
     setLawns(updatedLawns);
   };
   return (

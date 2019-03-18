@@ -96,7 +96,7 @@ library.add(
 const App = () => {
   const { loading } = React.useContext(AppContext);
   return (
-    <div style={{ maxWidth: 640, margin: "0 auto" }}>
+    <div style={{ maxWidth: 640, margin: "0 auto", height: "100%" }}>
       {loading ? (
         <Loading />
       ) : (
