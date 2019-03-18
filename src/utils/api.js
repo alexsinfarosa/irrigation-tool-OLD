@@ -9,8 +9,8 @@ export const fetchForecastData = (latitude, longitude) => {
     .get(url)
     .then(res => {
       // console.log(res.data);
-      const { currently, daily } = res.data;
-      return { currently, daily };
+      // const { currently, daily } = res.data;
+      return res.data;
     })
     .catch(err => {
       console.log("Failed to load forecast weather data", err);
@@ -23,9 +23,16 @@ export const currentModelMainFunction = (
   isTomorrowAbove,
   isInTwoDaysAbove
 ) => {
-  const { lat, lng, year, sprinkler } = field;
+  const {
+    lat,
+    lng,
+    irrigationDate,
+    sprinklerRate,
+    sprinklerMinutes,
+    isThisYear
+  } = field;
   // console.log(currentModelMainFunction CALLED!)
-
+  const year = new Date(irrigationDate).getFullYear();
   // the first date is 03/01 of the selected year. It goes up to today plus 3 days forecast
   const url = `${process.env.REACT_APP_PROXYIRRIGATION}?lat=${lat.toFixed(
     4
@@ -39,30 +46,29 @@ export const currentModelMainFunction = (
       const dates = [...res.data.dates_precip, ...res.data.dates_precip_fcst];
       let pcpns = [...res.data.precip, ...res.data.precip_fcst];
 
-      console.log(field.year === new Date().getFullYear());
       // only if probability of precipitation is above 60% we include the amount of precipitation, otherwise is zero
-      if (field.year === new Date().getFullYear()) {
+      if (isThisYear) {
         if (!isTomorrowAbove) pcpns[pcpns.length - 3] = 0;
         if (!isInTwoDaysAbove) pcpns[pcpns.length - 2] = 0;
       }
       const pets = [...res.data.pet, ...res.data.pet_fcst];
 
       const results = runWaterDeficitModel(pcpns, pets);
-      console.log(results);
       const data = results.deficitDaily.map((val, i) => {
         let p = {};
-        p.date = `${dates[i]}/${year}`;
+        const ddd = `${dates[i]}/${year}`;
+        p.date = new Date(ddd).toLocaleDateString();
         p.deficit = +val.toFixed(2);
         p.pet = +pets[i];
         p.pcpn = +pcpns[i];
         p.waterAppliedByUser = 0;
-        p.threshold = sprinkler.waterFlow * sprinkler.minutes * -2;
+        p.threshold = sprinklerRate * sprinklerMinutes * -2;
         p.barDeficit =
           p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
         return p;
       });
 
-      // console.log(data);
+      console.log(data);
       return data;
     })
     .catch(err => {

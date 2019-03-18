@@ -9,6 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 // components
 import Nav from "../components/Nav";
+import BarChartDeficit from "../components/barChart";
 
 // common styles
 import { main } from "../styles/common";
@@ -24,8 +25,40 @@ const Lawn = ({ classes }) => {
 
   return (
     <>
-      <main className={classes.main}>
-        <pre>{JSON.stringify(lawn, null, 2)}</pre>
+      <main className={classes.main} style={{ padding: 0 }}>
+        <div>
+          {true ? (
+            <Typography
+              variant="h6"
+              align="center"
+              style={{
+                background: "#F79824",
+                color: "#fff",
+                marginBottom: 16
+              }}
+            >
+              Water!
+            </Typography>
+          ) : (
+            <Typography
+              variant="h6"
+              align="center"
+              style={{
+                background: "#0197F6",
+                color: "#fff",
+                marginBottom: 16
+              }}
+            >
+              Do not water!
+            </Typography>
+          )}
+        </div>
+
+        <Typography variant="subtitle2" align="center" color="textSecondary">
+          {lawn.address}
+        </Typography>
+
+        <BarChartDeficit />
 
         <Dialog
           open={isDialog}

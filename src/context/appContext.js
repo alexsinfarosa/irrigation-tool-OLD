@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 import { navigate } from "@reach/router";
 
 // utils ===========================
-import { fetchForecastData } from "../utils/api";
+import { fetchForecastData, currentModelMainFunction } from "../utils/api";
 // import { numberOfHoursLapsed } from "../utils/utils";
 
 const AppContext = createContext({});
@@ -54,6 +54,7 @@ const AppProvider = ({ children }) => {
       sprinklerMinutes: 20,
       id: null,
       updated: null,
+      threshold: null,
       forecast: {},
       data: []
     };
@@ -66,12 +67,17 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  // async function fetchForecast() {
-  //   setLoading(true);
-  //   const forecast = await fetchForecastData(lawn.lat, lawn.lng);
-  //   updateLawn(forecast);
-  //   setLoading(false);
-  // }
+  function probabilityOfPrecip(data) {
+    const tomorrowPrecipProbability = data[1].precipProbability;
+    let isTomorrowAbove = false;
+    if (tomorrowPrecipProbability > 0.6) isTomorrowAbove = true;
+
+    let isInTwoDaysAbove = false;
+    const inTwoDaysPrecipProbability = data[2].precipProbability;
+    if (inTwoDaysPrecipProbability > 0.6) isInTwoDaysAbove = true;
+
+    return [isTomorrowAbove, isInTwoDaysAbove];
+  }
 
   // React.useEffect(() => {
   //   console.log("useEffect 3");
@@ -87,7 +93,20 @@ const AppProvider = ({ children }) => {
     console.log("addLawn");
     setLoading(true);
     const forecast = await fetchForecastData(lawn.lat, lawn.lng);
-    const updatedLawn = { ...lawn, ...newLawn, forecast: { ...forecast } };
+    const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
+      forecast.daily.data
+    );
+    const data = await currentModelMainFunction(
+      lawn,
+      isTomorrowAbove,
+      isInTwoDaysAbove
+    );
+    const updatedLawn = {
+      ...lawn,
+      ...newLawn,
+      forecast,
+      data
+    };
     updateLawn(updatedLawn);
 
     const updatedLawns = [updatedLawn, ...lawns];
