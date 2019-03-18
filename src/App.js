@@ -15,7 +15,6 @@ import Landing from "./pages/Landing";
 import Location from "./pages/Location";
 import IrrigationDate from "./pages/IrrigationDate";
 import Sprinkler from "./pages/Sprinkler";
-import Main from "./pages/Main";
 import Info from "./pages/Info";
 import Lawn from "./pages/Lawn";
 import Forecast from "./pages/Forecast";

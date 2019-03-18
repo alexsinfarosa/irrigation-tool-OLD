@@ -13,9 +13,10 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   // path
-  const path = window.location.pathname.split("/");
-  const tab = path[path.length - 1];
-  const [navPath, setNavPath] = useState(tab);
+  // const path = window.location.pathname.split("/");
+  // const tab = path[path.length - 1];
+  // console.log(tab);
+  const [navPath, setNavPath] = useState("home");
 
   const initialLawns = () =>
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];

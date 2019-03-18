@@ -5,13 +5,13 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 // utils
-import { Link } from "@reach/router";
+import { navigate } from "@reach/router";
 
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppContext from "../context/appContext";
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     height: 90,
     opacity: 0.95,
@@ -20,26 +20,7 @@ const styles = theme => ({
   }
 });
 
-const NavLink = props => {
-  return (
-    <Link
-      {...props}
-      getProps={({ isCurrent }) => {
-        // the object returned here is passed to the
-        // anchor element's props
-        return {
-          style: {
-            color: isCurrent
-              ? props.theme.palette.primary.main
-              : props.theme.palette.grey["700"]
-          }
-        };
-      }}
-    />
-  );
-};
-
-const Nav = ({ classes, theme }) => {
+const Nav = React.memo(({ classes }) => {
   const { navPath, setNavPath } = React.useContext(AppContext);
   function handleChange(event, newValue) {
     setNavPath(newValue);
@@ -47,7 +28,7 @@ const Nav = ({ classes, theme }) => {
   console.log(navPath);
   return (
     <BottomNavigation
-      value={navPath === "" ? "home" : navPath}
+      value={navPath}
       onChange={handleChange}
       showLabels
       className={classes.root}
@@ -55,58 +36,54 @@ const Nav = ({ classes, theme }) => {
       <BottomNavigationAction
         label="Info"
         value="info"
+        onClick={() => navigate("/info")}
         icon={
-          <NavLink to="/info" theme={theme}>
-            {navPath === "info" ? (
-              <FontAwesomeIcon icon={["fa", "info-circle"]} size="2x" />
-            ) : (
-              <FontAwesomeIcon icon={["fal", "info-circle"]} size="2x" />
-            )}
-          </NavLink>
+          navPath === "info" ? (
+            <FontAwesomeIcon icon={["fa", "info-circle"]} size="2x" />
+          ) : (
+            <FontAwesomeIcon icon={["fal", "info-circle"]} size="2x" />
+          )
         }
       />
 
       <BottomNavigationAction
         label="Home"
         value="home"
+        onClick={() => navigate("/home")}
         icon={
-          <NavLink to="/home" theme={theme}>
-            {navPath === "home" || navPath === "" ? (
-              <FontAwesomeIcon icon={["fa", "home"]} size="2x" />
-            ) : (
-              <FontAwesomeIcon icon={["fal", "home"]} size="2x" />
-            )}
-          </NavLink>
+          navPath === "home" ? (
+            <FontAwesomeIcon icon={["fa", "home"]} size="2x" />
+          ) : (
+            <FontAwesomeIcon icon={["fal", "home"]} size="2x" />
+          )
         }
       />
       <BottomNavigationAction
         label="Forecast"
         value="forecast"
+        onClick={() => navigate("/forecast")}
         icon={
-          <NavLink to="/forecast" theme={theme}>
-            {navPath === "forecast" ? (
-              <FontAwesomeIcon icon={["fa", "cloud"]} size="2x" />
-            ) : (
-              <FontAwesomeIcon icon={["fal", "cloud"]} size="2x" />
-            )}
-          </NavLink>
+          navPath === "forecast" ? (
+            <FontAwesomeIcon icon={["fa", "cloud"]} size="2x" />
+          ) : (
+            <FontAwesomeIcon icon={["fal", "cloud"]} size="2x" />
+          )
         }
       />
       <BottomNavigationAction
         label="Lawns"
         value="lawns"
+        onClick={() => navigate("/lawns")}
         icon={
-          <NavLink to="/lawns" theme={theme}>
-            {navPath === "lawns" ? (
-              <FontAwesomeIcon icon={["fa", "th-list"]} size="2x" />
-            ) : (
-              <FontAwesomeIcon icon={["fal", "th-list"]} size="2x" />
-            )}
-          </NavLink>
+          navPath === "lawns" ? (
+            <FontAwesomeIcon icon={["fa", "th-list"]} size="2x" />
+          ) : (
+            <FontAwesomeIcon icon={["fal", "th-list"]} size="2x" />
+          )
         }
       />
     </BottomNavigation>
   );
-};
+});
 
 export default withRoot(withStyles(styles)(withTheme()(Nav)));
