@@ -21,7 +21,7 @@ export const footer = {
 
 export const buttonBig = {
   fontSize: "1.1rem",
-  height: "100%"
+  height: 90
 };
 
 export const buttonMid = {

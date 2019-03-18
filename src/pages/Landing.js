@@ -16,9 +16,7 @@ const styles = theme => ({
     height: "100vh",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 16,
-    paddingBottom: 16
+    alignItems: "center"
   },
   titleText: {
     color: theme.palette.text.secondary,

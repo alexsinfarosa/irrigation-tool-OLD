@@ -11,12 +11,7 @@ const AppProvider = ({ children }) => {
   console.log("AppProvider");
   // STATE ------------------------------------------------
   const [loading, setLoading] = useState(false);
-
-  // path
-  // const path = window.location.pathname.split("/");
-  // const tab = path[path.length - 1];
-  // console.log(tab);
-  const [navPath, setNavPath] = useState("home");
+  const [navPath, setNavPath] = useState("forecast");
 
   const initialLawns = () =>
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
@@ -27,7 +22,6 @@ const AppProvider = ({ children }) => {
     console.log("useEffect 1");
     if (lawns.length !== 0) {
       navigate("/home");
-      setNavPath("home");
     }
   }, []);
 
@@ -98,7 +92,6 @@ const AppProvider = ({ children }) => {
 
     const updatedLawns = [updatedLawn, ...lawns];
     setLawns(updatedLawns);
-    setNavPath("home");
     window.localStorage.setItem(
       "lawn-irrigation-tool",
       JSON.stringify(updatedLawns)
