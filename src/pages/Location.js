@@ -12,6 +12,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 // utils
 import hideVirtualKeyboard from "hide-virtual-keyboard";
+import { buttonBig } from "../styles/common";
 
 // GOOGLE API
 import PlacesAutocomplete from "react-places-autocomplete";
@@ -264,6 +265,7 @@ const Location = ({ classes, theme }) => {
           fullWidth
           color="primary"
           onClick={() => updateLawn(state)}
+          style={{ ...buttonBig }}
         >
           Continue
         </ButtonLink>

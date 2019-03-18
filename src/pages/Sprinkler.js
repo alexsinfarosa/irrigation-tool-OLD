@@ -17,7 +17,7 @@ import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 
 // common styles
-import { locationRoot, main } from "../styles/common";
+import { locationRoot, main, buttonBig } from "../styles/common";
 
 // images
 import SpraySprinkler from "../images/spraySprinkler.png";
@@ -253,6 +253,7 @@ const Sprinkler = ({ classes, theme }) => {
         onClick={() => {
           addLawn({ ...state, id: Date.now(), updated: Date.now() });
         }}
+        style={{ ...buttonBig }}
       >
         CREATE ENTRY
       </ButtonLink>

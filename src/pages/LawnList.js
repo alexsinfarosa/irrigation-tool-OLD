@@ -19,7 +19,7 @@ import Logos from "../components/Logos";
 import ButtonLink from "../components/ButtonLink";
 
 // common styles
-import { pageWrapper, main } from "../styles/common";
+import { pageWrapper, main, buttonMid } from "../styles/common";
 
 // utils
 import format from "date-fns/format";
@@ -53,7 +53,12 @@ const LawnList = ({ classes, theme }) => {
       <main className={classes.main}>
         <Logos />
         <div style={{ margin: "24px auto", textAlign: "center" }}>
-          <ButtonLink to="/location" color="primary" variant="outlined">
+          <ButtonLink
+            to="/location"
+            color="primary"
+            variant="outlined"
+            style={{ ...buttonMid }}
+          >
             New Entry
           </ButtonLink>
         </div>

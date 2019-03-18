@@ -7,6 +7,9 @@ import Typography from "@material-ui/core/Typography";
 import ButtonLink from "../components/ButtonLink";
 import Logos from "../components/Logos";
 
+// utils
+import { buttonBig } from "../styles/common";
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -87,7 +90,7 @@ const Landing = ({ classes }) => {
         to="/location"
         variant="outlined"
         color="primary"
-        size="large"
+        style={{ ...buttonBig }}
       >
         Get Started
       </ButtonLink>

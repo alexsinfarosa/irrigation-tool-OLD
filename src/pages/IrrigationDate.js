@@ -12,7 +12,7 @@ import { DatePicker } from "material-ui-pickers";
 import format from "date-fns/format";
 
 // common styles
-import { locationRoot, main } from "../styles/common";
+import { buttonBig, locationRoot, main } from "../styles/common";
 import AppContext from "../context/appContext";
 
 const styles = theme => ({
@@ -73,6 +73,7 @@ const IrrigationDate = ({ classes }) => {
         fullWidth
         color="primary"
         onClick={() => updateLawn(irrigationDate)}
+        style={{ ...buttonBig }}
       >
         Continue
       </ButtonLink>
