@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => {
   console.log("AppProvider");
   // STATE ------------------------------------------------
   const [loading, setLoading] = useState(false);
-  const [navPath, setNavPath] = useState("forecast");
+  const [navPath, setNavPath] = useState("home");
 
   const initialLawns = () =>
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];

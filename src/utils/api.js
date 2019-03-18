@@ -42,7 +42,7 @@ export const currentModelMainFunction = (
   return axios
     .get(url)
     .then(res => {
-      console.log(`BrianCALL`, res.data);
+      // console.log(`BrianCALL`, res.data);
       const dates = [...res.data.dates_precip, ...res.data.dates_precip_fcst];
       let pcpns = [...res.data.precip, ...res.data.precip_fcst];
 
@@ -68,7 +68,7 @@ export const currentModelMainFunction = (
         return p;
       });
 
-      console.log(data);
+      // console.log(data);
       return data;
     })
     .catch(err => {

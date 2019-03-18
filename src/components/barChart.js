@@ -54,7 +54,7 @@ const reversedLastDays = field => {
   return reverse(data);
 };
 
-function BarChartDeficit({ classes, theme }) {
+const BarChartDeficit = React.memo(({ classes, theme }) => {
   console.log("BarChart");
   const { lawn, setLawn, setLawns } = React.useContext(AppContext);
 
@@ -315,6 +315,6 @@ function BarChartDeficit({ classes, theme }) {
       </BarChart>
     </div>
   );
-}
+});
 
 export default withRoot(withStyles(styles)(withTheme()(BarChartDeficit)));

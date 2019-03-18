@@ -77,8 +77,8 @@ const LawnList = ({ classes, theme }) => {
                 <ListItem
                   onClick={() => {
                     setLawn(l);
-                    navigate("/main");
-                    setNavPath("main");
+                    navigate("/home");
+                    setNavPath("home");
                   }}
                 >
                   {true ? (
