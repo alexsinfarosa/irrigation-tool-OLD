@@ -21,10 +21,16 @@ const styles = theme => ({
 });
 
 const Lawn = ({ classes }) => {
-  const { lawn } = React.useContext(AppContext);
+  const { lawns, lawn, visits } = React.useContext(AppContext);
   const [isDialog, setIsDialog] = React.useState(false);
 
-  console.log(lawn);
+  React.useEffect(() => {
+    if (visits === 1 && lawns.length === 1) {
+      setIsDialog(true);
+    }
+  }, []);
+
+  // console.log(lawn);
   return (
     <>
       <main className={classes.main} style={{ padding: 0 }}>

@@ -10,6 +10,9 @@ const AppContext = createContext({});
 const AppProvider = ({ children }) => {
   // console.log("AppProvider");
   // STATE ------------------------------------------------
+  const initialVisits = () =>
+    JSON.parse(window.localStorage.getItem("lawn-irrigation-tool-visits")) || 0;
+  const [visits, setVisits] = useState(initialVisits);
   const [loading, setLoading] = useState(false);
   const [navPath, setNavPath] = useState("home");
 
@@ -21,6 +24,12 @@ const AppProvider = ({ children }) => {
   React.useEffect(() => {
     // console.log("useEffect 1");
     lawns.length === 0 ? navigate("/") : navigate("/home");
+    const count = visits + 1;
+    setVisits(count);
+    window.localStorage.setItem(
+      "lawn-irrigation-tool-visits",
+      JSON.stringify(count)
+    );
   }, []);
 
   React.useEffect(() => {
@@ -48,7 +57,7 @@ const AppProvider = ({ children }) => {
       isThisYear: true,
       sprinklerType: "Fixed Spray",
       sprinklerImg: null,
-      sprinklerRate: 1.4,
+      sprinklerRate: 0.05,
       sprinklerMinutes: 20,
       id: null,
       updated: null,
@@ -101,7 +110,7 @@ const AppProvider = ({ children }) => {
       data
     };
     updateLawn(updatedLawn);
-
+    setNavPath("home");
     const updatedLawns = [updatedLawn, ...lawns];
     setLawns(updatedLawns);
     window.localStorage.setItem(
@@ -123,7 +132,8 @@ const AppProvider = ({ children }) => {
         setLawn,
         lawns,
         setLawns,
-        addLawn
+        addLawn,
+        visits
       }}
     >
       {children}

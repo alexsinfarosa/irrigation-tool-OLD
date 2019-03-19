@@ -55,7 +55,7 @@ export const currentModelMainFunction = (
 
       const results = runWaterDeficitModel(pcpns, pets);
       const threshold = -2 * ((sprinklerRate * sprinklerMinutes) / 60);
-      console.log(sprinklerRate, sprinklerMinutes, threshold);
+
       const data = results.deficitDaily.map((val, i) => {
         let p = {};
         const ddd = `${dates[i]}/${year}`;

@@ -32,7 +32,7 @@ const sprinklers = [
   {
     sprinklerType: "Fixed Spray",
     sprinklerImg: SpraySprinkler,
-    sprinklerRate: 1.4 // inches of water/hr
+    sprinklerRate: 0.05 // inches of water/hr
   },
   {
     sprinklerType: "Single Stream Rotor",
@@ -99,7 +99,7 @@ const initialState = () => {
   return {
     sprinklerType: "Fixed Spray",
     sprinklerImg: SpraySprinkler,
-    sprinklerRate: 1.4,
+    sprinklerRate: 0.05,
     sprinklerMinutes: 20
   };
 };
