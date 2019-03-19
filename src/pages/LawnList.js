@@ -68,6 +68,8 @@ const LawnList = ({ classes, theme }) => {
         </div>
         {lawns.map(l => {
           const isSelected = l.id === lawn.id;
+          const isDeficit =
+            l.data.find(d => d.date === l.irrigationDate).barDeficit < 0;
           return (
             <Paper
               key={l.id}
@@ -82,7 +84,7 @@ const LawnList = ({ classes, theme }) => {
                     setNavPath("home");
                   }}
                 >
-                  {true ? (
+                  {isDeficit ? (
                     <FontAwesomeIcon icon="tint" color={"#F79824"} size="2x" />
                   ) : (
                     <FontAwesomeIcon icon="tint" color={"#0197F6"} size="2x" />

@@ -85,30 +85,23 @@ const AppProvider = ({ children }) => {
     return [isTomorrowAbove, isInTwoDaysAbove];
   }
 
-  // React.useEffect(() => {
-  //   console.log("useEffect 3");
-  //   waterMessage();
-  // }, []);
-
   // CRUD ------------------------------------------------
   const addLawn = async newLawn => {
     // console.log("addLawn");
     setLoading(true);
-    const forecast = await fetchForecastData(lawn.lat, lawn.lng);
+    let updatedLawn = { ...lawn, ...newLawn };
+
+    const forecast = await fetchForecastData(updatedLawn.lat, updatedLawn.lng);
     const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
       forecast.daily.data
     );
     const data = await currentModelMainFunction(
-      lawn,
+      updatedLawn,
       isTomorrowAbove,
       isInTwoDaysAbove
     );
-    const updatedLawn = {
-      ...lawn,
-      ...newLawn,
-      forecast,
-      data
-    };
+    updatedLawn = { ...updatedLawn, forecast, data };
+
     updateLawn(updatedLawn);
     setNavPath("home");
     const updatedLawns = [updatedLawn, ...lawns];
