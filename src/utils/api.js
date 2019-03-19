@@ -62,7 +62,7 @@ export const currentModelMainFunction = (
         p.pet = +pets[i];
         p.pcpn = +pcpns[i];
         p.waterAppliedByUser = 0;
-        p.threshold = sprinklerRate * sprinklerMinutes * -2;
+        p.threshold = -2 * ((sprinklerRate * sprinklerMinutes) / 60);
         p.barDeficit =
           p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
         return p;

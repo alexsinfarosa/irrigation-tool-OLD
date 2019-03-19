@@ -30,24 +30,24 @@ import AppContext from "../context/appContext";
 const SliderWithTooltip = createSliderWithTooltip(Slider);
 const sprinklers = [
   {
-    sprinklerType: "Spray Sprinkler",
+    sprinklerType: "Fixed Spray",
     sprinklerImg: SpraySprinkler,
-    sprinklerRate: 0.02 // inches of water/min
+    sprinklerRate: 1.4 // inches of water/hr
   },
   {
     sprinklerType: "Single Stream Rotor",
     sprinklerImg: SingleStreamRotor,
-    sprinklerRate: 0.01
+    sprinklerRate: 0.9 // inches of water/hr
   },
   {
     sprinklerType: "Multiple Stream Rotor",
     sprinklerImg: MultipleStreamRotor,
-    sprinklerRate: 0.01
+    sprinklerRate: 0.35 // inches of water/hr
   },
   {
-    sprinklerType: "Moveable Sprinkler",
+    sprinklerType: "Moveable",
     sprinklerImg: MoveableSprinkler,
-    sprinklerRate: 0.022
+    sprinklerRate: 1.2 // inches of water/hr
   }
 ];
 
@@ -97,9 +97,9 @@ const styles = theme => ({
 // Initial state ------------------------------------------------------
 const initialState = () => {
   return {
-    sprinklerType: "",
-    sprinklerImg: null,
-    sprinklerRate: 0.05,
+    sprinklerType: "Fixed Spray",
+    sprinklerImg: { SpraySprinkler },
+    sprinklerRate: 1.4,
     sprinklerMinutes: 20
   };
 };
@@ -118,9 +118,9 @@ function reducer(state, action) {
       return { ...state, sprinklerMinutes: action.sprinklerMinutes };
     case "reset":
       return {
-        sprinklerType: "",
-        sprinklerImg: null,
-        sprinklerRate: 0.05,
+        sprinklerType: "Fixed Spray",
+        sprinklerImg: { SpraySprinkler },
+        sprinklerRate: 1.4,
         sprinklerMinutes: 20
       };
     default:

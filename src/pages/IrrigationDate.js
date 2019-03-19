@@ -54,7 +54,7 @@ const IrrigationDate = ({ classes }) => {
             disableFuture
             keyboard
             showTodayButton
-            // minDate={`03/01/${new Date().getFullYear()}`}
+            minDate={`03/01/${new Date().getFullYear()}`}
             minDateMessage="Data is only available after March 1st."
             format={format(
               new Date(irrigationDate.irrigationDate),

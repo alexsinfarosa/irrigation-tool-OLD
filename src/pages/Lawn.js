@@ -24,6 +24,7 @@ const Lawn = ({ classes }) => {
   const { lawn } = React.useContext(AppContext);
   const [isDialog, setIsDialog] = React.useState(false);
 
+  console.log(lawn);
   return (
     <>
       <main className={classes.main} style={{ padding: 0 }}>

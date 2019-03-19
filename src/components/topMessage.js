@@ -11,7 +11,8 @@ const TopMessage = ({ lawn, theme }) => {
   const irrigationDate = lawn.data.find(day => day.date === today);
 
   let streetNumber = "odd";
-  if (lawn.streetNumber % 2 === 0) streetNumber = "even";
+  if (lawn.streetNumber !== null && lawn.streetNumber % 2 === 0)
+    streetNumber = "even";
 
   let todayDate = "odd";
   if (new Date().getDate() % 2 === 0) todayDate = "even";

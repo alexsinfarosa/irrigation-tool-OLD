@@ -52,7 +52,6 @@ const AppProvider = ({ children }) => {
       sprinklerMinutes: 20,
       id: null,
       updated: null,
-      threshold: null,
       forecast: {},
       data: []
     };

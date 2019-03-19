@@ -63,7 +63,7 @@ const reversedLastDays = field => {
   return reverse(data);
 };
 
-const BarChartDeficit = React.memo(({ classes, theme }) => {
+const BarChartDeficit = React.memo(({ theme }) => {
   console.log("BarChart");
   const { lawn, setLawn, setLawns } = React.useContext(AppContext);
   const [lastDays, setLastDays] = React.useState(reversedLastDays(lawn));
@@ -268,6 +268,7 @@ const BarChartDeficit = React.memo(({ classes, theme }) => {
             </svg>
           </g>
         ) : lastDays[index].waterAppliedByUser === 0 ? (
+          lawn.streetNumber !== null &&
           lastDays[index].date === today &&
           !allowedToWater(lastDays[index].date) ? (
             <Typography variant="caption">not allowed</Typography>
