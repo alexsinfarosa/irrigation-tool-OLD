@@ -98,7 +98,7 @@ const styles = theme => ({
 const initialState = () => {
   return {
     sprinklerType: "Fixed Spray",
-    sprinklerImg: { SpraySprinkler },
+    sprinklerImg: SpraySprinkler,
     sprinklerRate: 1.4,
     sprinklerMinutes: 20
   };

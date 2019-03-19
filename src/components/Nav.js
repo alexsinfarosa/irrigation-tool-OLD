@@ -25,7 +25,7 @@ const Nav = React.memo(({ classes }) => {
   function handleChange(event, newValue) {
     setNavPath(newValue);
   }
-  console.log(navPath);
+  // console.log(navPath);
   return (
     <BottomNavigation
       value={navPath}

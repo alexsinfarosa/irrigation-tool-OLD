@@ -8,7 +8,7 @@ import { fetchForecastData, currentModelMainFunction } from "../utils/api";
 const AppContext = createContext({});
 
 const AppProvider = ({ children }) => {
-  console.log("AppProvider");
+  // console.log("AppProvider");
   // STATE ------------------------------------------------
   const [loading, setLoading] = useState(false);
   const [navPath, setNavPath] = useState("home");
@@ -19,12 +19,12 @@ const AppProvider = ({ children }) => {
 
   // console.log(lawns.length);
   React.useEffect(() => {
-    console.log("useEffect 1");
+    // console.log("useEffect 1");
     lawns.length === 0 ? navigate("/") : navigate("/home");
   }, []);
 
   React.useEffect(() => {
-    console.log("useEffect 2");
+    // console.log("useEffect 2");
     if (lawns.length !== 0) {
       window.localStorage.setItem(
         "lawn-irrigation-tool",
@@ -46,9 +46,9 @@ const AppProvider = ({ children }) => {
       isStreetNumberRequired: false,
       irrigationDate: new Date().toLocaleDateString(),
       isThisYear: true,
-      sprinklerType: "",
+      sprinklerType: "Fixed Spray",
       sprinklerImg: null,
-      sprinklerRate: 0.05,
+      sprinklerRate: 1.4,
       sprinklerMinutes: 20,
       id: null,
       updated: null,
@@ -83,7 +83,7 @@ const AppProvider = ({ children }) => {
 
   // CRUD ------------------------------------------------
   const addLawn = async newLawn => {
-    console.log("addLawn");
+    // console.log("addLawn");
     setLoading(true);
     const forecast = await fetchForecastData(lawn.lat, lawn.lng);
     const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
