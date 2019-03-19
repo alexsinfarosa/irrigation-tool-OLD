@@ -20,9 +20,7 @@ const AppProvider = ({ children }) => {
   // console.log(lawns.length);
   React.useEffect(() => {
     console.log("useEffect 1");
-    if (lawns.length !== 0) {
-      navigate("/home");
-    }
+    lawns.length === 0 ? navigate("/") : navigate("/home");
   }, []);
 
   React.useEffect(() => {
@@ -81,11 +79,7 @@ const AppProvider = ({ children }) => {
 
   // React.useEffect(() => {
   //   console.log("useEffect 3");
-  //   const numOfHours = numberOfHoursLapsed(lawn.updated);
-  //   console.log(numOfHours);
-  //   if (false) {
-  //     fetchForecast();
-  //   }
+  //   waterMessage();
   // }, []);
 
   // CRUD ------------------------------------------------

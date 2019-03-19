@@ -4,7 +4,15 @@ import { withStyles, withTheme } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { BarChart, Bar, XAxis, YAxis, ReferenceLine, Cell } from "recharts";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  ReferenceLine,
+  Cell
+} from "recharts";
 
 // utils
 import reverse from "lodash.reverse";
@@ -15,6 +23,7 @@ import addDays from "date-fns/addDays";
 import { runWaterDeficitModel } from "../utils/api";
 
 import AppContext from "../context/appContext";
+import { Typography } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -57,7 +66,6 @@ const reversedLastDays = field => {
 const BarChartDeficit = React.memo(({ classes, theme }) => {
   console.log("BarChart");
   const { lawn, setLawn, setLawns } = React.useContext(AppContext);
-
   const [lastDays, setLastDays] = React.useState(reversedLastDays(lawn));
 
   // The domain needs to be as big as possible related to the deficit
@@ -215,14 +223,31 @@ const BarChartDeficit = React.memo(({ classes, theme }) => {
     );
   };
 
+  function allowedToWater(date) {
+    let streetNumber = "odd";
+    if (lawn.streetNumber % 2 === 0) streetNumber = "even";
+    let todayDate = "odd";
+    if (new Date(date).getDate() % 2 === 0) todayDate = "even";
+    return streetNumber === todayDate;
+  }
+
+  // console.log(window.innerWidth, window.innerHeight);
+  let width = window.innerWidth;
+  if (width > 600) width = 640;
+  let height = "82%";
+  if (window.innerHeight < 450) height = 600;
+  // console.log(width, height);
+
   const RightIconButtons = props => {
     const { y, index, payload, lastDays } = props;
+    const today = new Date().toLocaleDateString();
+
     return (
       <svg
         width={100}
-        height={30}
-        x={lawn.isThisYear ? window.innerWidth - 93 : window.innerWidth - 80}
-        y={y - 16}
+        height={22}
+        x={lawn.isThisYear ? width - 93 : width - 80}
+        y={y - 10}
         style={{ filter: "brightness(0.5) sepia(1) " }}
       >
         {isAfter(new Date(lastDays[index].date), new Date()) ? (
@@ -243,11 +268,16 @@ const BarChartDeficit = React.memo(({ classes, theme }) => {
             </svg>
           </g>
         ) : lastDays[index].waterAppliedByUser === 0 ? (
-          <FontAwesomeIcon
-            icon={["fa", "tint"]}
-            color={theme.palette.grey["300"]}
-            onClick={() => watered(payload.value)}
-          />
+          lastDays[index].date === today &&
+          !allowedToWater(lastDays[index].date) ? (
+            <Typography variant="caption">not allowed</Typography>
+          ) : (
+            <FontAwesomeIcon
+              icon={["fa", "tint"]}
+              color={theme.palette.grey["300"]}
+              onClick={() => watered(payload.value)}
+            />
+          )
         ) : (
           <FontAwesomeIcon
             icon={["fas", "tint"]}
@@ -260,14 +290,14 @@ const BarChartDeficit = React.memo(({ classes, theme }) => {
   };
 
   return (
-    <div className={classes.root}>
+    <ResponsiveContainer width={width} height={height}>
       <BarChart
         layout="vertical"
-        width={window.innerWidth > 500 ? 500 : window.innerWidth}
-        height={window.innerHeight < 500 ? 500 : window.innerHeight - 165}
+        // width={window.innerWidth > 500 ? 500 : window.innerWidth}
+        // height={window.innerHeight < 500 ? 500 : window.innerHeight - 165}
         data={lastDays}
-        maxBarSize={16}
-        margin={{ top: 10, right: 40, left: 50, bottom: 8 }}
+        maxBarSize={15}
+        margin={{ top: 24, right: 40, left: 50, bottom: 8 }}
       >
         <XAxis
           type="number"
@@ -313,7 +343,7 @@ const BarChartDeficit = React.memo(({ classes, theme }) => {
           })}
         </Bar>
       </BarChart>
-    </div>
+    </ResponsiveContainer>
   );
 });
 

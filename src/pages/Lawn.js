@@ -10,6 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 // components
 import Nav from "../components/Nav";
 import BarChartDeficit from "../components/barChart";
+import TopMessage from "../components/topMessage";
 
 // common styles
 import { main } from "../styles/common";
@@ -26,33 +27,7 @@ const Lawn = ({ classes }) => {
   return (
     <>
       <main className={classes.main} style={{ padding: 0 }}>
-        <div>
-          {true ? (
-            <Typography
-              variant="h6"
-              align="center"
-              style={{
-                background: "#F79824",
-                color: "#fff",
-                marginBottom: 16
-              }}
-            >
-              Water!
-            </Typography>
-          ) : (
-            <Typography
-              variant="h6"
-              align="center"
-              style={{
-                background: "#0197F6",
-                color: "#fff",
-                marginBottom: 16
-              }}
-            >
-              Do not water!
-            </Typography>
-          )}
-        </div>
+        <TopMessage lawn={lawn} />
 
         <Typography variant="subtitle2" align="center" color="textSecondary">
           {lawn.address}
