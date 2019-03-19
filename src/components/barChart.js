@@ -185,6 +185,7 @@ const BarChartDeficit = React.memo(({ theme }) => {
   const YaxisLabel = props => {
     const { x, y, payload } = props;
     const date = payload.value;
+    const isDeficit = lawn.data.find(d => d.date === date).barDeficit < 0;
     const today = new Date();
     const tomorrow = addDays(today, 1);
     const yesterday = subDays(today, 1);
@@ -201,7 +202,11 @@ const BarChartDeficit = React.memo(({ theme }) => {
           return <tspan fontSize="1rem">Tomorrow</tspan>;
         case "today":
           return (
-            <tspan fontWeight="bold" fill="red" fontSize="1.2rem">
+            <tspan
+              fontWeight="bold"
+              fill={isDeficit ? "#F79824" : "#0197F6"}
+              fontSize="1.2rem"
+            >
               TODAY
             </tspan>
           );
