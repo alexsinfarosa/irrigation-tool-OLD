@@ -105,7 +105,11 @@ const LawnList = ({ classes, theme }) => {
                       }}
                       style={{ marginRight: 8 }}
                     >
-                      <FontAwesomeIcon icon={["fal", "ellipsis-h"]} size="lg" />
+                      <FontAwesomeIcon
+                        icon={["fa", "trash"]}
+                        size="sm"
+                        color={theme.palette.grey["600"]}
+                      />
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>

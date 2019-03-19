@@ -28,7 +28,6 @@ import {
   faInfoCircle as falInfoCircle,
   faThList as falThList,
   faCloud as falCloud,
-  faEllipsisH as falEllipsisH,
   faPlusCircle,
   faMoon as fasMoon,
   faFog as fasFog,
@@ -39,7 +38,8 @@ import {
   faCloudSleet as fasCloudSleet,
   faClouds as fasClouds,
   faSun as fasSun,
-  faCloudRain as falCloudRain
+  faCloudRain as falCloudRain,
+  faTrash as falTrash
 } from "@fortawesome/pro-light-svg-icons";
 import {
   faTint,
@@ -47,7 +47,7 @@ import {
   faInfoCircle,
   faThList,
   faCloud,
-  faEllipsisH,
+  faTrash,
   faMoon,
   faFog,
   faWind,
@@ -67,12 +67,12 @@ library.add(
   faCloud,
   faChevronLeft,
   faTint,
-  faEllipsisH,
   falHome,
   falInfoCircle,
   falThList,
   falCloud,
-  falEllipsisH,
+  faTrash,
+  falTrash,
   faPlusCircle,
   fasMoon,
   fasFog,
