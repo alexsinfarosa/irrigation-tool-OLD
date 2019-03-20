@@ -15,12 +15,13 @@ import TopMessage from "../components/topMessage";
 // common styles
 import { main } from "../styles/common";
 import AppContext from "../context/appContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const styles = theme => ({
   main: { ...main }
 });
 
-const Lawn = ({ classes }) => {
+const Lawn = ({ classes, theme }) => {
   const { lawns, lawn, visits } = React.useContext(AppContext);
   const [isDialog, setIsDialog] = React.useState(false);
 
@@ -36,9 +37,24 @@ const Lawn = ({ classes }) => {
       <main className={classes.main} style={{ padding: 0 }}>
         <TopMessage lawn={lawn} />
 
-        <Typography variant="subtitle2" align="center" color="textSecondary">
-          {lawn.address}
-        </Typography>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center"
+          }}
+        >
+          <Typography variant="subtitle2" align="center" color="textSecondary">
+            {lawn.address}
+          </Typography>
+
+          <FontAwesomeIcon
+            icon={["fal", "question-circle"]}
+            onClick={() => setIsDialog(true)}
+            size="lg"
+            color={theme.palette.grey["500"]}
+          />
+        </div>
 
         <BarChartDeficit />
 

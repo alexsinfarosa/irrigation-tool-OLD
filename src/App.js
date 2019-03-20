@@ -39,7 +39,8 @@ import {
   faClouds as fasClouds,
   faSun as fasSun,
   faCloudRain as falCloudRain,
-  faTrash as falTrash
+  faTrash as falTrash,
+  faQuestionCircle
 } from "@fortawesome/pro-light-svg-icons";
 import {
   faTint,
@@ -94,7 +95,8 @@ library.add(
   faClouds,
   faSun,
   faCloudRain,
-  faRaindrops
+  faRaindrops,
+  faQuestionCircle
 );
 
 const styles = () => ({

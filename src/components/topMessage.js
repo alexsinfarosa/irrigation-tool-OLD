@@ -22,7 +22,7 @@ const TopMessage = ({ lawn, theme }) => {
 
   return (
     <div>
-      {allowedToWater ? (
+      {!lawn.isStreetNumberRequired || allowedToWater ? (
         <Typography
           variant="h6"
           align="center"
