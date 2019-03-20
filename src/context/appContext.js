@@ -3,7 +3,7 @@ import { navigate } from "@reach/router";
 
 // utils ===========================
 import { fetchForecastData, currentModelMainFunction } from "../utils/api";
-// import { numberOfHoursLapsed } from "../utils/utils";
+import differenceInHours from "date-fns/differenceInHours";
 
 const AppContext = createContext({});
 
@@ -30,6 +30,38 @@ const AppProvider = ({ children }) => {
       "lawn-irrigation-tool-visits",
       JSON.stringify(count)
     );
+  }, []);
+
+  const fetchForecastAndData = async () => {
+    const lawnCopy = { ...lawn };
+    const hours = differenceInHours(Date.now(), new Date(lawnCopy.updated));
+    // console.log(hours);
+    if (hours > 1) {
+      console.log("updating forecast and data...");
+      setLoading(true);
+      const forecast = await fetchForecastData(lawnCopy.lat, lawnCopy.lng);
+      const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
+        forecast.daily.data
+      );
+      const data = await currentModelMainFunction(
+        lawnCopy,
+        isTomorrowAbove,
+        isInTwoDaysAbove
+      );
+      const updatedLawnCopy = {
+        ...lawnCopy,
+        updated: Date.now(),
+        forecast,
+        data
+      };
+
+      setLoading(false);
+      updateLawn(updatedLawnCopy);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchForecastAndData();
   }, []);
 
   React.useEffect(() => {
@@ -67,6 +99,7 @@ const AppProvider = ({ children }) => {
   };
 
   const [lawn, setLawn] = useState(initialState);
+
   const updateLawn = updatedState => {
     setLawn(prevState => {
       return { ...prevState, ...updatedState };

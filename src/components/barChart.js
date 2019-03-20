@@ -65,7 +65,7 @@ const reversedLastDays = field => {
 
 const BarChartDeficit = React.memo(({ theme }) => {
   // console.log("BarChart");
-  const { lawn, setLawn, setLawns } = React.useContext(AppContext);
+  const { lawn, setLawn, lawns, setLawns } = React.useContext(AppContext);
   const [lastDays, setLastDays] = React.useState(reversedLastDays(lawn));
 
   // The domain needs to be as big as possible related to the deficit
@@ -108,7 +108,7 @@ const BarChartDeficit = React.memo(({ theme }) => {
     const copy = { ...lawn };
 
     const index = copy.data.findIndex(d => d.date === date);
-    const water = copy.sprinkler.waterFlow * copy.sprinkler.minutes;
+    const water = copy.sprinklerRate * copy.sprinklerMinutes;
     const day = copy.data[index];
     day.waterAppliedByUser = day.waterAppliedByUser === 0 ? water : 0;
     day.waterAppliedByUser === 0
@@ -126,23 +126,12 @@ const BarChartDeficit = React.memo(({ theme }) => {
         p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
       return p;
     });
-    copy.data = updatedData;
-    // copy.updated = Date.now();
-    // setLastUpdate(copy.updated);
+    copy.data = [...updatedData];
     setLawn(copy);
     setLastDays(reversedLastDays(copy));
-
-    const localStorageRef = JSON.parse(
-      window.localStorage.getItem("lawn-irrigation-tool")
-    );
-    const fieldIdx = localStorageRef.findIndex(f => f.id === copy.id);
-    localStorageRef[fieldIdx] = copy;
-    setLawns(localStorageRef);
-    // setFields(localStorageRef);
-    window.localStorage.setItem(
-      "lawn-irrigation-tool",
-      JSON.stringify(localStorageRef)
-    );
+    const filteredLawns = lawns.filter(l => l.id === lawn.id);
+    const updatedLawns = [copy, ...filteredLawns];
+    setLawns(updatedLawns);
   };
 
   const XaxisLabel = props => {
