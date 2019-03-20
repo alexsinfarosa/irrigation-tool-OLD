@@ -61,7 +61,9 @@ const AppProvider = ({ children }) => {
   };
 
   React.useEffect(() => {
-    fetchForecastAndData();
+    if (lawns.length !== 0) {
+      fetchForecastAndData();
+    }
   }, []);
 
   React.useEffect(() => {
