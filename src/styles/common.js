@@ -1,7 +1,8 @@
 export const mainContainer = {
   height: "100%",
   maxWidth: 640,
-  margin: "0 auto"
+  margin: "0 auto",
+  background: "#fff"
 };
 
 export const main = {

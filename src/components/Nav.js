@@ -16,7 +16,8 @@ const styles = () => ({
     height: 90,
     opacity: 0.95,
     display: "flex",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    background: "#fafafa"
   }
 });
 

@@ -18,7 +18,21 @@ import AppContext from "../context/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const styles = theme => ({
-  main: { ...main }
+  main: { ...main },
+  blue: {
+    color: "#fff",
+    background: "#3F96ED",
+    padding: `1px 3px`,
+    borderRadius: 2,
+    letterSpacing: 1
+  },
+  orange: {
+    color: "#fff",
+    background: "#EA9B42",
+    padding: "1px 3px",
+    borderRadius: 2,
+    letterSpacing: 1
+  }
 });
 
 const Lawn = ({ classes, theme }) => {
@@ -66,42 +80,94 @@ const Lawn = ({ classes, theme }) => {
           hideBackdrop={true}
         >
           <DialogTitle id="alert-dialog-title">
-            <Typography variant="body1" gutterBottom>
-              First
+            <Typography
+              variant="body1"
+              gutterBottom
+              style={{ color: theme.palette.primary.dark }}
+            >
+              Top Bar
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea
-              corporis delectus laborum eaque odit ex perferendis! Pariatur
-              totam harum numquam nostrum eos, delectus quo enim velit at nemo,
-              blanditiis expedita?
+              The top part of the application displays the recommendation. If
+              the top bar color is grey it means the user is subjected to Nassau
+              County's even/odd ordinance, hence is only allowed to water the
+              lawn on even or odd days, depending on whethere their street
+              address number is even or odd.
             </Typography>
 
             <br />
-            <Typography variant="body1" gutterBottom>
-              Second
+            <Typography
+              variant="body1"
+              gutterBottom
+              style={{ color: theme.palette.primary.dark }}
+            >
+              Address
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt
-              molestias quo nisi. Corrupti dolore, explicabo sapiente adipisci
-              quibusdam pariatur voluptate eum cumque, reprehenderit laboriosam
-              inventore exercitationem iusto aliquid accusantium illo.
+              This is the address provided by the user. It is required to obtain
+              weather related data. On the right side of the address there is a
+              question mark icon. Tapping this icon will trigger the pop-up
+              on/off.
             </Typography>
 
             <br />
-            <Typography variant="body1" gutterBottom>
-              Third
+            <Typography
+              variant="body1"
+              gutterBottom
+              style={{ color: theme.palette.primary.dark }}
+            >
+              Graph
             </Typography>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-              dolore esse minima obcaecati, consectetur, earum ea qui deserunt
-              omnis dolorum ipsam blanditiis voluptas voluptatem quam quas neque
-              officia, temporibus aspernatur.
+            <Typography variant="body2" gutterBottom>
+              To better explain this part, we could imagine to split the graph
+              in three columns: left, center and right. The left column shows
+              the dates. The first two dates from the top are forecast dates,
+              the colored date, which can be orange or blue, depending on the
+              deficit status, is the current date. Going down we have dates in
+              the past which go back a full week.
+            </Typography>
+
+            <br />
+            <Typography variant="body2" gutterBottom>
+              The center part of the graph there are the colored bars. The bar
+              represents the water deficit of a given day, it can be orange or
+              blue. An orange bar is displayed when there is water deficit,
+              hence the lawn is dry. A blue bar is displayed when there is no
+              deficit, the lawn is wet. The length of the bar gives the user a
+              guidance on the relative amount of dryiness or wettness the lawn
+              is.
+            </Typography>
+
+            <br />
+            <Typography variant="body2" gutterBottom>
+              The column on the right containing the icons is the area where the
+              user interacts with the app. The first two forecast icons from the
+              top are not clickable and are there just to inform the user of the
+              probability of precipitation. The drop shaped icons can be tapped
+              by the user. Tapping the icon, which changes its color to blue
+              indicates that the lawn has been watered. Untapping the icon,
+              which makes it grey indicates that no water was applied on the
+              lawn.
+            </Typography>
+
+            <br />
+            <Typography
+              variant="body1"
+              gutterBottom
+              style={{ color: theme.palette.primary.dark }}
+            >
+              How to use the app
+            </Typography>
+
+            <Typography variant="body2" gutterBottom>
+              When opening the app, the user should check the top bar first and
+              follow the recomendation by tapping on the drop icon for the
+              current day.
             </Typography>
           </DialogTitle>
-
           <DialogActions>
             <Button color="secondary" onClick={() => setIsDialog(false)}>
-              OK!
+              Close
             </Button>
           </DialogActions>
         </Dialog>
