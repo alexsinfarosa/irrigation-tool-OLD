@@ -35,7 +35,7 @@ const AppProvider = ({ children }) => {
   const fetchForecastAndData = async () => {
     const lawnCopy = { ...lawn };
     const hours = differenceInHours(Date.now(), new Date(lawnCopy.updated));
-    // console.log(hours);
+    console.log(hours);
     if (hours > 1) {
       console.log("updating forecast and data...");
       setLoading(true);

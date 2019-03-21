@@ -129,11 +129,11 @@ const BarChartDeficit = React.memo(({ theme }) => {
     copy.data = [...updatedData];
     setLawn(copy);
     setLastDays(reversedLastDays(copy));
-    console.log(lawns);
+    // console.log(lawns);
     const filteredLawns = lawns.filter(l => l.id !== lawn.id);
-    console.log(filteredLawns);
+    // console.log(filteredLawns);
     const updatedLawns = [copy, ...filteredLawns];
-    console.log(updatedLawns);
+    // console.log(updatedLawns);
     setLawns(updatedLawns);
   };
 
