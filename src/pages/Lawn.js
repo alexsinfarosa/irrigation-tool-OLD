@@ -156,7 +156,7 @@ const Lawn = ({ classes, theme }) => {
               gutterBottom
               style={{ color: theme.palette.primary.dark }}
             >
-              How to use the app
+              Example
             </Typography>
 
             <Typography variant="body2" gutterBottom>
