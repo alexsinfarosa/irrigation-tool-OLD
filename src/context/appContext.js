@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
     const lawnCopy = { ...lawn };
     const hours = differenceInHours(Date.now(), new Date(lawnCopy.updated));
     console.log(hours);
-    if (hours > 1) {
+    if (hours > 6) {
       console.log("updating forecast and data...");
       setLoading(true);
       const forecast = await fetchForecastData(lawnCopy.lat, lawnCopy.lng);
@@ -51,12 +51,17 @@ const AppProvider = ({ children }) => {
       const updatedLawnCopy = {
         ...lawnCopy,
         updated: Date.now(),
+        irrigationDate: new Date().toLocaleDateString(),
         forecast,
         data
       };
+      console.log(updatedLawnCopy);
 
-      setLoading(false);
+      let lawnsCopy = [...lawns].filter(l => l.id !== updatedLawnCopy.id);
+      const newLawns = [updatedLawnCopy, ...lawnsCopy];
       updateLawn(updatedLawnCopy);
+      setLawns(newLawns);
+      setLoading(false);
     }
   };
 
