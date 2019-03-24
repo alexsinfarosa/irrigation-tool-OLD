@@ -51,11 +51,10 @@ const AppProvider = ({ children }) => {
       const updatedLawnCopy = {
         ...lawnCopy,
         updated: Date.now(),
-        irrigationDate: new Date().toLocaleDateString(),
         forecast,
         data
       };
-      console.log(updatedLawnCopy);
+      // console.log(updatedLawnCopy);
 
       let lawnsCopy = [...lawns].filter(l => l.id !== updatedLawnCopy.id);
       const newLawns = [updatedLawnCopy, ...lawnsCopy];

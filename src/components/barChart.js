@@ -20,6 +20,7 @@ import format from "date-fns/format";
 import isAfter from "date-fns/isAfter";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
+import takeRight from "lodash.takeright";
 import { runWaterDeficitModel } from "../utils/api";
 
 import AppContext from "../context/appContext";
@@ -31,29 +32,59 @@ const styles = theme => ({
   }
 });
 
+// const reversedLastDays = field => {
+//   // only latest value to display on the barChart
+//   const irrigationDateIdx = field.data.findIndex(
+//     d => d.date === field.irrigationDate
+//   );
+
+//   const idxMinus7Days = irrigationDateIdx - 7 < 0 ? 0 : irrigationDateIdx - 7;
+//   const idxPlus2Days = irrigationDateIdx + 3;
+
+//   // console.log(field);
+//   const forecast3Days = field.forecast.daily.data.slice(0, 3);
+//   // console.log(forecast3Days);
+//   let data = field.data.slice(idxMinus7Days, idxPlus2Days);
+//   if (field.isThisYear) {
+//     data = data.map((d, i) => {
+//       let p = { ...d };
+//       if (i === 7) {
+//         p.forecast = forecast3Days[0];
+//       }
+//       if (i === 8) {
+//         p.forecast = forecast3Days[1];
+//       }
+//       if (i === 9) {
+//         p.forecast = forecast3Days[2];
+//       }
+//       return p;
+//     });
+//   }
+//   // console.log(data);
+//   return reverse(data);
+// };
+
 const reversedLastDays = field => {
-  // only latest value to display on the barChart
-  const irrigationDateIdx = field.data.findIndex(
-    d => d.date === field.irrigationDate
-  );
+  const currentHour = new Date().getHours();
+  // console.log(currentHour);
+  let data = takeRight(field.data, 9);
+  if (currentHour > 13) {
+    data = takeRight(field.data.slice(0, -1), 9);
+  }
+  // console.log(data);
 
-  const idxMinus7Days = irrigationDateIdx - 7 < 0 ? 0 : irrigationDateIdx - 7;
-  const idxPlus2Days = irrigationDateIdx + 3;
-
-  // console.log(field);
   const forecast3Days = field.forecast.daily.data.slice(0, 3);
-  // console.log(forecast3Days);
-  let data = field.data.slice(idxMinus7Days, idxPlus2Days);
   if (field.isThisYear) {
     data = data.map((d, i) => {
+      // console.log(i);
       let p = { ...d };
-      if (i === 7) {
+      if (i === 6) {
         p.forecast = forecast3Days[0];
       }
-      if (i === 8) {
+      if (i === 7) {
         p.forecast = forecast3Days[1];
       }
-      if (i === 9) {
+      if (i === 8) {
         p.forecast = forecast3Days[2];
       }
       return p;
