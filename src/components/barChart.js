@@ -90,7 +90,7 @@ const reversedLastDays = field => {
       return p;
     });
   }
-  // console.log(data);
+  console.log(data);
   return reverse(data);
 };
 
@@ -108,10 +108,12 @@ const BarChartDeficit = React.memo(({ theme }) => {
     const absMax = Math.abs(max);
 
     const dom = Math.max(absMin, absMax);
+    console.log(`FIRST: ${dom + dom * 0.4} `);
     return dom + dom * 0.4;
   };
 
   const [domain, setDomain] = React.useState(initialDomain);
+  console.log(`DOMAIN: ${domain}`);
   const determineDomain = lastDays => {
     const min = Math.min(...lastDays.map(d => d.barDeficit));
     const max = Math.max(...lastDays.map(d => d.barDeficit));
@@ -122,6 +124,7 @@ const BarChartDeficit = React.memo(({ theme }) => {
     const newDomain = Math.max(absMin, absMax);
     const maxDomain = Math.max(domain, newDomain);
 
+    console.log(`maxDomain: ${maxDomain}`);
     setDomain(maxDomain);
   };
 
@@ -139,7 +142,8 @@ const BarChartDeficit = React.memo(({ theme }) => {
     const copy = { ...lawn };
 
     const index = copy.data.findIndex(d => d.date === date);
-    const water = copy.sprinklerRate * copy.sprinklerMinutes;
+    const water = (copy.sprinklerRate * copy.sprinklerMinutes) / 60;
+    console.log(water, copy.sprinklerRate, copy.sprinklerMinutes);
     const day = copy.data[index];
     day.waterAppliedByUser = day.waterAppliedByUser === 0 ? water : 0;
     day.waterAppliedByUser === 0

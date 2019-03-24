@@ -2,7 +2,11 @@ import React, { createContext, useState } from "react";
 import { navigate } from "@reach/router";
 
 // utils ===========================
-import { fetchForecastData, currentModelMainFunction } from "../utils/api";
+import {
+  fetchForecastData,
+  currentModelMainFunction,
+  runWaterDeficitModel
+} from "../utils/api";
 import differenceInHours from "date-fns/differenceInHours";
 
 const AppContext = createContext({});
@@ -20,9 +24,7 @@ const AppProvider = ({ children }) => {
     JSON.parse(window.localStorage.getItem("lawn-irrigation-tool")) || [];
   const [lawns, setLawns] = useState(initialLawns);
 
-  // console.log(lawns.length);
   React.useEffect(() => {
-    // console.log("useEffect 1");
     lawns.length === 0 ? navigate("/") : navigate("/home");
     const count = visits + 1;
     setVisits(count);
@@ -35,9 +37,8 @@ const AppProvider = ({ children }) => {
   const fetchForecastAndData = async () => {
     const lawnCopy = { ...lawn };
     const hours = differenceInHours(Date.now(), new Date(lawnCopy.updated));
-    console.log(hours);
+
     if (hours > 6) {
-      console.log("updating forecast and data...");
       setLoading(true);
       const forecast = await fetchForecastData(lawnCopy.lat, lawnCopy.lng);
       const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
@@ -54,7 +55,6 @@ const AppProvider = ({ children }) => {
         forecast,
         data
       };
-      // console.log(updatedLawnCopy);
 
       let lawnsCopy = [...lawns].filter(l => l.id !== updatedLawnCopy.id);
       const newLawns = [updatedLawnCopy, ...lawnsCopy];
@@ -95,7 +95,7 @@ const AppProvider = ({ children }) => {
       isThisYear: true,
       sprinklerType: "Fixed Spray",
       sprinklerImg: null,
-      sprinklerRate: 0.05,
+      sprinklerRate: 1.4,
       sprinklerMinutes: 20,
       id: null,
       updated: null,
@@ -139,11 +139,32 @@ const AppProvider = ({ children }) => {
       isTomorrowAbove,
       isInTwoDaysAbove
     );
-    updatedLawn = { ...updatedLawn, forecast, data };
 
-    updateLawn(updatedLawn);
+    const index = data.findIndex(d => d.date === updatedLawn.irrigationDate);
+
+    const water =
+      (updatedLawn.sprinklerRate * updatedLawn.sprinklerMinutes) / 60;
+    const pcpns = data.map(d => d.pcpn);
+    pcpns[index] = pcpns[index] + water;
+    const pets = data.map(d => d.pet);
+    const updatedDeficit = runWaterDeficitModel(pcpns, pets);
+
+    const updatedData = data.map((day, i) => {
+      let p = { ...day };
+
+      p.pcpn = i === index ? day.pcpn + water : day.pcpn;
+      p.waterAppliedByUser = i === index ? water : 0;
+      p.deficit = +updatedDeficit.deficitDaily[i].toFixed(2);
+      p.barDeficit =
+        p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
+      return p;
+    });
+
+    const newUpdatedLawn = { ...updatedLawn, forecast, data: updatedData };
+
+    updateLawn(newUpdatedLawn);
     setNavPath("home");
-    const updatedLawns = [updatedLawn, ...lawns];
+    const updatedLawns = [newUpdatedLawn, ...lawns];
     setLawns(updatedLawns);
     window.localStorage.setItem(
       "lawn-irrigation-tool",

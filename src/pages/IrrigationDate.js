@@ -52,6 +52,7 @@ const IrrigationDate = ({ classes }) => {
           <DatePicker
             variant="outlined"
             disableFuture
+            // shouldDisableDate={day => console.log(day)}
             keyboard
             showTodayButton
             minDate={`03/01/${new Date().getFullYear()}`}
