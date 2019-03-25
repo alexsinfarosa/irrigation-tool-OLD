@@ -264,7 +264,6 @@ const Location = ({ classes, theme }) => {
             variant="contained"
             color="primary"
             onClick={() => updateLawn(state)}
-            fullWidth
             style={{ ...buttonBig }}
           >
             Continue

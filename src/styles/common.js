@@ -14,16 +14,13 @@ export const main = {
 export const footer = {
   width: "100%",
   background: "#fff",
-  height: 90,
-  position: "fixed",
-  bottom: 0,
-  left: 0,
-  right: 0
+  height: 90
 };
 
 export const buttonBig = {
   fontSize: "1.1rem",
-  height: 90
+  height: "100%",
+  width: "100%"
 };
 
 export const buttonMid = {
