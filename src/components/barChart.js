@@ -63,7 +63,7 @@ const reversedLastDays = field => {
 };
 
 const BarChartDeficit = React.memo(({ theme }) => {
-  console.log("BarChart");
+  // console.log("BarChart");
   const { lawn, setLawn, lawns, setLawns } = React.useContext(AppContext);
   const [lastDays, setLastDays] = React.useState(reversedLastDays(lawn));
 
