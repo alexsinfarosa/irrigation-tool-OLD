@@ -13,6 +13,7 @@ export const main = {
 
 export const footer = {
   width: "100%",
+  background: "#fff",
   height: 90,
   position: "fixed",
   bottom: 0,

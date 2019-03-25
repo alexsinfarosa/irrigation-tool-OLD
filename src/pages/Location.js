@@ -231,7 +231,7 @@ const Location = ({ classes, theme }) => {
                         cursor: "pointer"
                       }
                     : {
-                        backgroundColor: theme.palette.background.default,
+                        backgroundColor: "#fff",
                         padding: 16,
                         cursor: "pointer"
                       };
