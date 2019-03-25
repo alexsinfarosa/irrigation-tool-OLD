@@ -21,7 +21,7 @@ const styles = theme => ({
 });
 
 const IrrigationDate = ({ classes }) => {
-  console.log("IrrigationDate");
+  // console.log("IrrigationDate");
   // CONTEXT ---------------------------------------------------
   const { updateLawn } = React.useContext(AppContext);
 

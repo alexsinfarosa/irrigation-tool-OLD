@@ -19,8 +19,10 @@ export const footer = {
 
 export const buttonBig = {
   fontSize: "1.1rem",
-  height: "100%",
-  width: "100%"
+  paddingLeft: 64,
+  paddingRight: 64,
+  height: 90
+  // width: "100%"
 };
 
 export const buttonMid = {

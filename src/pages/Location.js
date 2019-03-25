@@ -74,7 +74,7 @@ function reducer(state, action) {
 }
 
 const Location = ({ classes, theme }) => {
-  console.log("Location");
+  // console.log("Location");
   // CONTEXT -----------------------------------------------
   const { updateLawn } = React.useContext(AppContext);
 
@@ -263,6 +263,7 @@ const Location = ({ classes, theme }) => {
             to="/irrigationDate"
             variant="contained"
             color="primary"
+            fullWidth
             onClick={() => updateLawn(state)}
             style={{ ...buttonBig }}
           >

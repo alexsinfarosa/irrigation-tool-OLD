@@ -38,7 +38,7 @@ const AppProvider = ({ children }) => {
     const lawnCopy = { ...lawn };
     const hours = differenceInHours(Date.now(), new Date(lawnCopy.updated));
 
-    if (hours > 6) {
+    if (hours > 2) {
       setLoading(true);
       const forecast = await fetchForecastData(lawnCopy.lat, lawnCopy.lng);
       const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
