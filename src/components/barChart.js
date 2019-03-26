@@ -33,11 +33,9 @@ const styles = theme => ({
 });
 
 const reversedLastDays = field => {
-  const currentHour = new Date().getHours();
-  // console.log(currentHour);
-  // console.log(field.data);
+  const today = new Date().toLocaleDateString();
   let data = takeRight(field.data, 9);
-  if (currentHour > 13) {
+  if (field.data[field.data.length - 3].date !== today) {
     data = takeRight(field.data.slice(0, -1), 9);
   }
   // console.log(data);
