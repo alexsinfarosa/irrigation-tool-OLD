@@ -186,7 +186,8 @@ const AppProvider = ({ children }) => {
         lawns,
         setLawns,
         addLawn,
-        visits
+        visits,
+        setVisits
       }}
     >
       {children}
