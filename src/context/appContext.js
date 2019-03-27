@@ -7,7 +7,8 @@ import {
   currentModelMainFunction,
   runWaterDeficitModel
 } from "../utils/api";
-import differenceInHours from "date-fns/differenceInHours";
+
+import differenceInMinutes from "date-fns/differenceInMinutes";
 
 const AppContext = createContext({});
 
@@ -36,10 +37,11 @@ const AppProvider = ({ children }) => {
 
   const fetchForecastAndData = async () => {
     const lawnCopy = { ...lawn };
-    const hours = differenceInHours(Date.now(), new Date(lawnCopy.updated));
-    console.log(hours);
-    if (hours > 1) {
-      console.log("UPDATED FORECAST AND DATA...");
+
+    const minutes = differenceInMinutes(Date.now(), new Date(lawnCopy.updated));
+    // console.log(minutes);
+    if (minutes > 120) {
+      // console.log("UPDATED FORECAST AND DATA...");
       setLoading(true);
       const forecast = await fetchForecastData(lawnCopy.lat, lawnCopy.lng);
       const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
@@ -141,27 +143,38 @@ const AppProvider = ({ children }) => {
       isInTwoDaysAbove
     );
 
-    const index = data.findIndex(d => d.date === updatedLawn.irrigationDate);
+    let newUpdatedLawn = {
+      ...updatedLawn,
+      irrigationDate: new Date().toLocaleDateString(),
+      forecast,
+      data
+    };
+    console.log(newUpdatedLawn);
+    if (updatedLawn.irrigationDate !== null) {
+      console.log("inside, adding water");
+      const index = data.findIndex(d => d.date === updatedLawn.irrigationDate);
 
-    const water =
-      (updatedLawn.sprinklerRate * updatedLawn.sprinklerMinutes) / 60;
-    const pcpns = data.map(d => d.pcpn);
-    pcpns[index] = pcpns[index] + water;
-    const pets = data.map(d => d.pet);
-    const updatedDeficit = runWaterDeficitModel(pcpns, pets);
+      const water =
+        (updatedLawn.sprinklerRate * updatedLawn.sprinklerMinutes) / 60;
+      const pcpns = data.map(d => d.pcpn);
+      pcpns[index] = pcpns[index] + water;
+      const pets = data.map(d => d.pet);
+      const updatedDeficit = runWaterDeficitModel(pcpns, pets);
 
-    const updatedData = data.map((day, i) => {
-      let p = { ...day };
+      const updatedData = data.map((day, i) => {
+        let p = { ...day };
 
-      p.pcpn = i === index ? day.pcpn + water : day.pcpn;
-      p.waterAppliedByUser = i === index ? water : 0;
-      p.deficit = +updatedDeficit.deficitDaily[i].toFixed(2);
-      p.barDeficit =
-        p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
-      return p;
-    });
+        p.pcpn = i === index ? day.pcpn + water : day.pcpn;
+        p.waterAppliedByUser = i === index ? water : 0;
+        p.deficit = +updatedDeficit.deficitDaily[i].toFixed(2);
+        p.barDeficit =
+          p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
+        return p;
+      });
 
-    const newUpdatedLawn = { ...updatedLawn, forecast, data: updatedData };
+      newUpdatedLawn = { ...updatedLawn, forecast, data: updatedData };
+      console.log(newUpdatedLawn);
+    }
 
     updateLawn(newUpdatedLawn);
     setNavPath("home");
