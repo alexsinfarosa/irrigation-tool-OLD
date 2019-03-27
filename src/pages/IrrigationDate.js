@@ -26,16 +26,15 @@ const IrrigationDate = ({ classes }) => {
   const { updateLawn } = React.useContext(AppContext);
 
   // State ---------------------------------------------------
-  const thisYear = new Date().getFullYear();
   const [irrigationDate, setIrrigationDate] = React.useState({
-    irrigationDate: new Date().toLocaleDateString(),
-    isThisYear: true
+    irrigationDate: null,
+    isRequired: true
   });
 
   const handleIrrigationDate = date => {
     setIrrigationDate({
       irrigationDate: date.toLocaleDateString(),
-      isThisYear: date.getFullYear() === thisYear
+      isRequired: false
     });
   };
 
@@ -43,8 +42,14 @@ const IrrigationDate = ({ classes }) => {
     <>
       <main className={classes.main}>
         <Header icon="chevron-left" title="Irrigation Date - (step 2/3)" />
-        <Typography variant="h6" align="center" gutterBottom>
-          When did you last irrigate your lawn?
+
+        <Typography
+          variant="h6"
+          align="center"
+          gutterBottom
+          style={{ marginTop: 16 }}
+        >
+          Select the date of last irrigation, otherwise tap continue
         </Typography>
 
         <br />

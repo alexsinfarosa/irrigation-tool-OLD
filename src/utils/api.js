@@ -23,16 +23,9 @@ export const currentModelMainFunction = (
   isTomorrowAbove,
   isInTwoDaysAbove
 ) => {
-  const {
-    lat,
-    lng,
-    irrigationDate,
-    sprinklerRate,
-    sprinklerMinutes,
-    isThisYear
-  } = field;
+  const { lat, lng, sprinklerRate, sprinklerMinutes, isThisYear } = field;
   // console.log(currentModelMainFunction CALLED!)
-  const year = new Date(irrigationDate).getFullYear();
+  const year = new Date().getFullYear();
   // the first date is 03/01 of the selected year. It goes up to today plus 3 days forecast
   const url = `${process.env.REACT_APP_PROXYIRRIGATION}?lat=${lat.toFixed(
     4
@@ -42,7 +35,7 @@ export const currentModelMainFunction = (
   return axios
     .get(url)
     .then(res => {
-      // console.log(`BrianCALL`, res.data);
+      console.log(`BrianCALL`, res.data);
       const dates = [...res.data.dates_precip, ...res.data.dates_precip_fcst];
       let pcpns = [...res.data.precip, ...res.data.precip_fcst];
 

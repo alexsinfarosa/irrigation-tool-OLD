@@ -37,8 +37,9 @@ const AppProvider = ({ children }) => {
   const fetchForecastAndData = async () => {
     const lawnCopy = { ...lawn };
     const hours = differenceInHours(Date.now(), new Date(lawnCopy.updated));
-
-    if (hours > 2) {
+    console.log(hours);
+    if (hours > 1) {
+      console.log("UPDATED FORECAST AND DATA...");
       setLoading(true);
       const forecast = await fetchForecastData(lawnCopy.lat, lawnCopy.lng);
       const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
