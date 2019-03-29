@@ -35,7 +35,7 @@ export const currentModelMainFunction = (
   return axios
     .get(url)
     .then(res => {
-      console.log(`BrianCALL`, res.data);
+      // console.log(`BrianCALL`, res.data);
       const dates = [...res.data.dates_precip, ...res.data.dates_precip_fcst];
       let pcpns = [...res.data.precip, ...res.data.precip_fcst];
 
@@ -47,23 +47,22 @@ export const currentModelMainFunction = (
       const pets = [...res.data.pet, ...res.data.pet_fcst];
 
       const results = runWaterDeficitModel(pcpns, pets);
-      const threshold = -2 * ((sprinklerRate * sprinklerMinutes) / 60);
+      const threshold = -1.6 * ((sprinklerRate * sprinklerMinutes) / 60);
 
       const data = results.deficitDaily.map((val, i) => {
         let p = {};
-        const ddd = `${dates[i]}/${year}`;
-        p.date = new Date(ddd).toLocaleDateString();
+
+        p.date = new Date(`${dates[i]}/${year}`).toLocaleDateString();
         p.deficit = +val.toFixed(2);
         p.pet = +pets[i];
         p.pcpn = +pcpns[i];
         p.waterAppliedByUser = 0;
         p.threshold = threshold;
-        p.barDeficit =
-          p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
+        p.barDeficit = +val - threshold;
         return p;
       });
 
-      // console.log(data);
+      console.log(data);
       return data;
     })
     .catch(err => {

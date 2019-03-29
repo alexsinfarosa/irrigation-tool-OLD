@@ -65,7 +65,7 @@ const BarChartDeficit = React.memo(({ theme }) => {
   // console.log("BarChart");
   const { lawn, setLawn, lawns, setLawns } = React.useContext(AppContext);
   const [lastDays, setLastDays] = React.useState(reversedLastDays(lawn));
-
+  console.log(lastDays);
   // The domain needs to be as big as possible related to the deficit
   const initialDomain = () => {
     const min = Math.min(...lastDays.map(d => d.barDeficit));
@@ -124,10 +124,11 @@ const BarChartDeficit = React.memo(({ theme }) => {
     const updatedData = copy.data.map((day, i) => {
       let p = { ...day };
       p.deficit = +updatedDeficit.deficitDaily[i].toFixed(2);
-      p.barDeficit =
-        p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
+      p.barDeficit = p.deficit - p.threshold;
+
       return p;
     });
+
     copy.data = [...updatedData];
     setLawn(copy);
     setLastDays(reversedLastDays(copy));
@@ -331,14 +332,16 @@ const BarChartDeficit = React.memo(({ theme }) => {
           tick={<RightIconButtons lastDays={lastDays} />}
         />
 
+        {/* <ReferenceLine x={threshold} stroke={theme.palette.grey["300"]} /> */}
         <ReferenceLine x={0} stroke={theme.palette.grey["300"]} />
 
         <Bar dataKey="barDeficit" minPointSize={0} radius={[0, 20, 20, 0]}>
           {lastDays.map(day => {
+            console.log(day.barDeficit);
             return (
               <Cell
                 key={day.date}
-                fill={day.barDeficit >= 0 ? "#0197F6" : "#F79824"}
+                fill={day.barDeficit < 0 ? "#F79824" : "#0197F6"}
               />
             );
           })}

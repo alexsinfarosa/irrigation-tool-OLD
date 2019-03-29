@@ -22,6 +22,9 @@ const TopMessage = ({ lawn, theme }) => {
 
   return (
     <div>
+      <Typography variant="body2" align="center" color="error">
+        (ßeta release)
+      </Typography>
       {!lawn.isStreetNumberRequired || allowedToWater ? (
         <Typography
           variant="h6"

@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 // components
 import Nav from "../components/Nav";
 import BarChartDeficit from "../components/barChart";
-import TopMessage from "../components/topMessage";
+import TopMessage from "../components/TopMessage";
 
 // common styles
 import { main } from "../styles/common";

@@ -66,6 +66,10 @@ const Landing = ({ classes }) => {
         >
           Calculator
         </Typography>
+
+        <Typography variant="h6" color="error">
+          (ßeta release)
+        </Typography>
       </div>
 
       <Typography
@@ -77,14 +81,14 @@ const Landing = ({ classes }) => {
         You can find out your watering needs for today and the next two days
       </Typography>
 
-      <Typography
+      {/*<Typography
         variant="body2"
         align="center"
         className={classes.smallTextBottom}
       >
         To ensure a healthy lawn, use less water and save money please follow
         the simple but scientific guidance
-      </Typography>
+      </Typography> */}
 
       <ButtonLink
         to="/location"

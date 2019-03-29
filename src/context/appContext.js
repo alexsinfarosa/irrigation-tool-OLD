@@ -149,9 +149,10 @@ const AppProvider = ({ children }) => {
       forecast,
       data
     };
-    console.log(newUpdatedLawn);
+
+    // console.log(newUpdatedLawn);
     if (updatedLawn.irrigationDate !== null) {
-      console.log("inside, adding water");
+      // console.log("inside, adding water");
       const index = data.findIndex(d => d.date === updatedLawn.irrigationDate);
 
       const water =
@@ -167,13 +168,12 @@ const AppProvider = ({ children }) => {
         p.pcpn = i === index ? day.pcpn + water : day.pcpn;
         p.waterAppliedByUser = i === index ? water : 0;
         p.deficit = +updatedDeficit.deficitDaily[i].toFixed(2);
-        p.barDeficit =
-          p.deficit >= 0 ? p.deficit - p.threshold : p.deficit - p.threshold;
+        p.barDeficit = p.deficit - p.threshold;
         return p;
       });
 
       newUpdatedLawn = { ...updatedLawn, forecast, data: updatedData };
-      console.log(newUpdatedLawn);
+      // console.log(newUpdatedLawn);
     }
 
     updateLawn(newUpdatedLawn);
