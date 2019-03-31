@@ -36,9 +36,11 @@ const AppProvider = ({ children }) => {
   }, []);
 
   const fetchForecastAndData = async () => {
+    // console.log("FetchForecastAndData");
     const lawnCopy = { ...lawn };
 
     const minutes = differenceInMinutes(Date.now(), new Date(lawnCopy.updated));
+    // console.log(lawnCopy.address, lawnCopy.updated);
     // console.log(minutes);
     if (minutes > 120) {
       // console.log("UPDATED FORECAST AND DATA...");
@@ -201,7 +203,8 @@ const AppProvider = ({ children }) => {
         setLawns,
         addLawn,
         visits,
-        setVisits
+        setVisits,
+        fetchForecastAndData
       }}
     >
       {children}

@@ -101,10 +101,13 @@ const Landing = ({ classes }) => {
 
       <div
         style={{
-          width: "100%",
-          paddingLeft: 16,
-          paddingRight: 16,
-          marginTop: "20%"
+          width: "90%",
+          position: "absolute",
+          bottom: 0
+          // paddingLeft: 16,
+          // paddingRight: 16,
+          // marginTop: "20%",
+          // background: "pink"
         }}
       >
         <Logos />

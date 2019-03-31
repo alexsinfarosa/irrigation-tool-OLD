@@ -65,7 +65,7 @@ const BarChartDeficit = React.memo(({ theme }) => {
   // console.log("BarChart");
   const { lawn, setLawn, lawns, setLawns } = React.useContext(AppContext);
   const [lastDays, setLastDays] = React.useState(reversedLastDays(lawn));
-  console.log(lastDays);
+
   // The domain needs to be as big as possible related to the deficit
   const initialDomain = () => {
     const min = Math.min(...lastDays.map(d => d.barDeficit));
@@ -181,11 +181,15 @@ const BarChartDeficit = React.memo(({ theme }) => {
   const YaxisLabel = props => {
     const { x, y, payload } = props;
     const date = payload.value;
-    const isDeficit = lawn.data.find(d => d.date === date).barDeficit < 0;
+    // const isDeficit = lawn.data.find(d => d.date === date).barDeficit < 0;
     const today = new Date();
     const tomorrow = addDays(today, 1);
     const yesterday = subDays(today, 1);
     const formatted = date => format(date, "M/dd/yyyy");
+
+    const todayPlusTwoDeficit = lawn.data[lawn.data.length - 1].barDeficit;
+    const todayDeficit = lawn.data[lawn.data.length - 3].barDeficit;
+    const isDeficit = todayPlusTwoDeficit + todayDeficit < 0;
 
     let day = "";
     if (date === formatted(tomorrow)) day = "tomorrow";
@@ -299,7 +303,8 @@ const BarChartDeficit = React.memo(({ theme }) => {
         // height={window.innerHeight < 500 ? 500 : window.innerHeight - 165}
         data={lastDays}
         maxBarSize={15}
-        margin={{ top: 24, right: 40, left: 50, bottom: 8 }}
+        margin={{ top: 24, right: 40, left: 50, bottom: 16 }}
+        // style={{ background: "pink" }}
       >
         <XAxis
           type="number"
@@ -337,8 +342,15 @@ const BarChartDeficit = React.memo(({ theme }) => {
 
         <Bar dataKey="barDeficit" minPointSize={0} radius={[0, 20, 20, 0]}>
           {lastDays.map(day => {
-            console.log(day.barDeficit);
-            return (
+            const today = day.date === new Date().toLocaleDateString();
+            const todayPlusTwoDeficit =
+              lawn.data[lawn.data.length - 1].barDeficit;
+            const todayDeficit = lawn.data[lawn.data.length - 3].barDeficit;
+            const isDeficit = todayPlusTwoDeficit + todayDeficit < 0;
+
+            return today ? (
+              <Cell key={day.date} fill={isDeficit ? "#F79824" : "#0197F6"} />
+            ) : (
               <Cell
                 key={day.date}
                 fill={day.barDeficit < 0 ? "#F79824" : "#0197F6"}

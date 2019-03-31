@@ -34,9 +34,14 @@ const styles = theme => ({
 });
 
 const LawnList = ({ classes, theme }) => {
-  const { lawns, lawn, setLawn, setLawns, setNavPath } = React.useContext(
-    AppContext
-  );
+  const {
+    lawns,
+    lawn,
+    setLawn,
+    setLawns,
+    setNavPath,
+    fetchForecastAndData
+  } = React.useContext(AppContext);
 
   // STATE ----------------------------------------------
   const [isDialog, setIsDialog] = React.useState(false);
@@ -82,6 +87,7 @@ const LawnList = ({ classes, theme }) => {
                     setLawn(l);
                     navigate("/home");
                     setNavPath("home");
+                    fetchForecastAndData();
                   }}
                 >
                   {isDeficit ? (

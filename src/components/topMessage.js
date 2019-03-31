@@ -7,8 +7,8 @@ import Typography from "@material-ui/core/Typography";
 const styles = theme => ({});
 
 const TopMessage = ({ lawn, theme }) => {
-  const today = new Date().toLocaleDateString();
-  const irrigationDate = lawn.data.find(day => day.date === today);
+  // const today = new Date().toLocaleDateString();
+  // const irrigationDate = lawn.data.find(day => day.date === today);
 
   let streetNumber = "odd";
   if (lawn.streetNumber !== null && lawn.streetNumber % 2 === 0)
@@ -18,7 +18,10 @@ const TopMessage = ({ lawn, theme }) => {
   if (new Date().getDate() % 2 === 0) todayDate = "even";
 
   const allowedToWater = streetNumber === todayDate;
-  const isDeficit = irrigationDate.barDeficit < 0;
+
+  const todayPlusTwoDeficit = lawn.data[lawn.data.length - 1].barDeficit;
+  const todayDeficit = lawn.data[lawn.data.length - 3].barDeficit;
+  const isDeficit = todayPlusTwoDeficit + todayDeficit < 0;
 
   return (
     <div>
