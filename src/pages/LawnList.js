@@ -20,6 +20,7 @@ import Nav from "../components/Nav";
 
 // common styles
 import { main, footer, buttonMid } from "../styles/common";
+import takeRight from "lodash.takeright";
 
 // utils
 import format from "date-fns/format";
@@ -38,6 +39,7 @@ const LawnList = ({ classes, theme }) => {
     lawns,
     lawn,
     updateLawn,
+    updateLawns,
     setLawns,
     setNavPath,
     fetchForecastAndData
@@ -73,8 +75,14 @@ const LawnList = ({ classes, theme }) => {
         </div>
         {lawns.map(l => {
           const isSelected = l.id === lawn.id;
-          const todayPlusTwoDeficit = l.data[l.data.length - 1].barDeficit;
-          const todayDeficit = l.data[l.data.length - 3].barDeficit;
+          const today = new Date().toLocaleDateString();
+          let data = takeRight(lawn.data, 9);
+          if (lawn.data[lawn.data.length - 3].date !== today) {
+            data = takeRight(lawn.data.slice(0, -1), 9);
+          }
+
+          const todayPlusTwoDeficit = data[data.length - 1].barDeficit;
+          const todayDeficit = data[data.length - 3].barDeficit;
           const isDeficit = todayPlusTwoDeficit + todayDeficit < 0;
           return (
             <Paper
@@ -86,6 +94,7 @@ const LawnList = ({ classes, theme }) => {
                 <ListItem
                   onClick={() => {
                     updateLawn(l);
+                    updateLawns(l);
                     fetchForecastAndData(l);
                     navigate("/home");
                     setNavPath("home");

@@ -3,6 +3,7 @@ import { withStyles, withTheme } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
 
 import Typography from "@material-ui/core/Typography";
+import takeRight from "lodash.takeright";
 
 const styles = theme => ({});
 
@@ -19,8 +20,14 @@ const TopMessage = ({ lawn, theme }) => {
 
   const allowedToWater = streetNumber === todayDate;
 
-  const todayPlusTwoDeficit = lawn.data[lawn.data.length - 1].barDeficit;
-  const todayDeficit = lawn.data[lawn.data.length - 3].barDeficit;
+  const today = new Date().toLocaleDateString();
+  let data = takeRight(lawn.data, 9);
+  if (lawn.data[lawn.data.length - 3].date !== today) {
+    data = takeRight(lawn.data.slice(0, -1), 9);
+  }
+
+  const todayPlusTwoDeficit = data[data.length - 1].barDeficit;
+  const todayDeficit = data[data.length - 3].barDeficit;
   const isDeficit = todayPlusTwoDeficit + todayDeficit < 0;
 
   return (

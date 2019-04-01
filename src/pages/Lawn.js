@@ -36,11 +36,11 @@ const styles = theme => ({
 });
 
 const Lawn = ({ classes, theme }) => {
-  const { lawns, lawn, visits, setVisits } = React.useContext(AppContext);
+  const { lawn, visits, setVisits } = React.useContext(AppContext);
   const [isDialog, setIsDialog] = React.useState(false);
 
   React.useEffect(() => {
-    if (visits <= 1 && lawns.length === 1) {
+    if (visits <= 1) {
       setIsDialog(true);
     }
   }, []);

@@ -103,7 +103,7 @@ const Landing = ({ classes }) => {
         style={{
           width: "90%",
           position: "absolute",
-          bottom: 0
+          bottom: 16
           // paddingLeft: 16,
           // paddingRight: 16,
           // marginTop: "20%",

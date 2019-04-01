@@ -57,7 +57,7 @@ const AppProvider = ({ children }) => {
       setLoading(true);
       const forecast = await fetchForecastData(lawnCopy.lat, lawnCopy.lng);
       const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
-        lawnCopy.forecast.daily.data
+        forecast.daily.data
       );
 
       const data = await currentModelMainFunction(
@@ -86,19 +86,19 @@ const AppProvider = ({ children }) => {
     }
   }, []);
 
-  // React.useEffect(() => {
-  //   console.log("useEffect 2");
-  //   if (lawns.length !== 0) {
-  //     window.localStorage.setItem(
-  //       "lawn-irrigation-tool",
-  //       JSON.stringify(lawns)
-  //     );
-  //   }
-  // }, [lawns]);
+  React.useEffect(() => {
+    // console.log("useEffect 2");
+    if (lawns.length !== 0) {
+      window.localStorage.setItem(
+        "lawn-irrigation-tool",
+        JSON.stringify(lawns)
+      );
+    }
+  }, [lawns]);
 
   // Initial State -----------------------------------------
   const initialState = () => {
-    console.log("InitialState called");
+    // console.log("InitialState called");
     if (lawns.length > 0) {
       return lawns[0];
     }
@@ -127,7 +127,6 @@ const AppProvider = ({ children }) => {
     setLawn(prevState => {
       return { ...prevState, ...updatedState };
     });
-    updateLawns(updatedState);
   };
 
   function probabilityOfPrecip(data) {
@@ -150,7 +149,7 @@ const AppProvider = ({ children }) => {
 
     const forecast = await fetchForecastData(updatedLawn.lat, updatedLawn.lng);
     const [isTomorrowAbove, isInTwoDaysAbove] = probabilityOfPrecip(
-      updatedLawn.forecast.daily.data
+      forecast.daily.data
     );
     const data = await currentModelMainFunction(
       updatedLawn,
@@ -217,7 +216,8 @@ const AppProvider = ({ children }) => {
         addLawn,
         visits,
         setVisits,
-        fetchForecastAndData
+        fetchForecastAndData,
+        updateLawns
       }}
     >
       {children}
