@@ -62,7 +62,7 @@ export const currentModelMainFunction = (
         return p;
       });
 
-      console.log(data);
+      // console.log(data);
       return data;
     })
     .catch(err => {

@@ -37,7 +37,7 @@ const LawnList = ({ classes, theme }) => {
   const {
     lawns,
     lawn,
-    setLawn,
+    updateLawn,
     setLawns,
     setNavPath,
     fetchForecastAndData
@@ -73,8 +73,9 @@ const LawnList = ({ classes, theme }) => {
         </div>
         {lawns.map(l => {
           const isSelected = l.id === lawn.id;
-          const isDeficit =
-            l.data.find(d => d.date === l.irrigationDate).barDeficit < 0;
+          const todayPlusTwoDeficit = l.data[l.data.length - 1].barDeficit;
+          const todayDeficit = l.data[l.data.length - 3].barDeficit;
+          const isDeficit = todayPlusTwoDeficit + todayDeficit < 0;
           return (
             <Paper
               key={l.id}
@@ -84,10 +85,10 @@ const LawnList = ({ classes, theme }) => {
               <List component="nav">
                 <ListItem
                   onClick={() => {
-                    setLawn(l);
+                    updateLawn(l);
+                    fetchForecastAndData(l);
                     navigate("/home");
                     setNavPath("home");
-                    fetchForecastAndData();
                   }}
                 >
                   {isDeficit ? (

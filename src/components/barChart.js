@@ -185,7 +185,7 @@ const BarChartDeficit = React.memo(({ theme }) => {
     const today = new Date();
     const tomorrow = addDays(today, 1);
     const yesterday = subDays(today, 1);
-    const formatted = date => format(date, "M/dd/yyyy");
+    const formatted = date => format(date, "M/d/yyyy");
 
     const todayPlusTwoDeficit = lawn.data[lawn.data.length - 1].barDeficit;
     const todayDeficit = lawn.data[lawn.data.length - 3].barDeficit;
