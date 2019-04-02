@@ -57,6 +57,8 @@ const reversedLastDays = field => {
     });
   }
   // console.log(data);
+  data[data.length - 3].barDeficit =
+    data[data.length - 3].barDeficit + data[data.length - 1].barDeficit;
   return reverse(data);
 };
 

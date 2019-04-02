@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
   }
 
   React.useEffect(() => {
-    lawns.length === 0 ? navigate("/") : navigate("/sprinkler");
+    lawns.length === 0 ? navigate("/") : navigate("/home");
     const count = visits + 1;
     setVisits(count);
     window.localStorage.setItem(
@@ -51,7 +51,7 @@ const AppProvider = ({ children }) => {
 
     const minutes = differenceInMinutes(Date.now(), new Date(lawnCopy.updated));
     // console.log(lawnCopy.address, lawnCopy.updated);
-    console.log(minutes);
+    // console.log(minutes);
     if (minutes > 240) {
       // console.log("UPDATED FORECAST AND DATA...");
       setLoading(true);

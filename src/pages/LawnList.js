@@ -23,7 +23,6 @@ import { main, footer, buttonMid } from "../styles/common";
 import takeRight from "lodash.takeright";
 
 // utils
-import format from "date-fns/format";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppContext from "../context/appContext";
 import { navigate } from "@reach/router";
@@ -76,11 +75,10 @@ const LawnList = ({ classes, theme }) => {
         {lawns.map(l => {
           const isSelected = l.id === lawn.id;
           const today = new Date().toLocaleDateString();
-          let data = takeRight(lawn.data, 9);
-          if (lawn.data[lawn.data.length - 3].date !== today) {
-            data = takeRight(lawn.data.slice(0, -1), 9);
+          let data = takeRight(l.data, 9);
+          if (l.data[l.data.length - 3].date !== today) {
+            data = takeRight(l.data.slice(0, -1), 9);
           }
-
           const todayPlusTwoDeficit = data[data.length - 1].barDeficit;
           const todayDeficit = data[data.length - 3].barDeficit;
           const isDeficit = todayPlusTwoDeficit + todayDeficit < 0;
@@ -108,10 +106,16 @@ const LawnList = ({ classes, theme }) => {
 
                   <ListItemText
                     primary={l.address}
-                    secondary={format(
-                      new Date(l.irrigationDate),
-                      "MMMM dd, yyyy"
-                    )}
+                    secondary={
+                      <>
+                        <Typography variant="caption" color="textSecondary">
+                          Rate: {l.sprinklerRate} in/hr
+                        </Typography>
+                        <Typography variant="caption" color="textSecondary">
+                          Time: {l.sprinklerMinutes} min
+                        </Typography>
+                      </>
+                    }
                   />
 
                   <ListItemSecondaryAction>
