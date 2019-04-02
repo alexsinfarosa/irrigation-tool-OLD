@@ -24,6 +24,8 @@ import SpraySprinkler from "../images/spraySprinkler.png";
 import SingleStreamRotor from "../images/singleStreamRotorSprinkler.png";
 import MultipleStreamRotor from "../images/multipleStreamRotorSprinkler.png";
 import MoveableSprinkler from "../images/moveableSprinkler.png";
+import Grass from "../images/grass.jpg";
+
 import AppContext from "../context/appContext";
 
 // slider tooltip
@@ -48,11 +50,16 @@ const sprinklers = [
     sprinklerType: "Moveable",
     sprinklerImg: MoveableSprinkler,
     sprinklerRate: 1.2 // inches of water/hr
+  },
+  {
+    sprinklerType: "Add rate manually",
+    sprinklerImg: Grass,
+    sprinklerRate: 0 // inches of water/hr
   }
 ];
 
 const styles = theme => ({
-  main: { ...main },
+  main: { ...main, overflowX: "hidden" },
   footer: { ...footer },
   containerList: {
     display: "flex",
@@ -116,6 +123,8 @@ function reducer(state, action) {
       };
     case "setMinutes":
       return { ...state, sprinklerMinutes: action.sprinklerMinutes };
+    case "setSprinklerRate":
+      return { ...state, sprinklerRate: action.sprinklerRate };
     case "reset":
       return {
         sprinklerType: "Fixed Spray",
@@ -162,12 +171,6 @@ const Sprinkler = ({ classes, theme }) => {
           <Typography variant="h6" align="center">
             What type of water system do you have?
           </Typography>
-
-          <br />
-          <Typography variant="caption" align="justify">
-            Note: If none is selected, it defaults to the most commonly sold
-            type in the region.
-          </Typography>
         </div>
 
         <div className={classes.containerList}>
@@ -199,10 +202,50 @@ const Sprinkler = ({ classes, theme }) => {
           </GridList>
         </div>
 
-        <div style={{ padding: "16px 24px" }}>
+        <div style={{ width: "100%", margin: "16px auto" }}>
+          {state.sprinklerType === "Add rate manually" && (
+            <>
+              <Typography variant="body1" align="center" gutterBottom>
+                My sprinkler rate is: {state.sprinklerRate.toFixed(2)} inches/hr
+              </Typography>
+              <div
+                style={{
+                  width: "90%",
+                  margin: "0 auto",
+                  marginTop: 48,
+                  marginBottom: 16
+                }}
+              >
+                <SliderWithTooltip
+                  // dots
+                  // activeDotStyle={{ borderColor: theme.palette.primary.light }}
+                  min={0}
+                  step={0.05}
+                  max={3}
+                  tipFormatter={e => `${e} in`}
+                  // tipProps={{ overlayClassName: "tipSlider" }}
+                  defaultValue={state.sprinklerRate}
+                  trackStyle={{ backgroundColor: theme.palette.primary.main }}
+                  handleStyle={{
+                    borderColor: theme.palette.primary.main,
+                    height: 28,
+                    width: 28,
+                    marginLeft: -14,
+                    marginTop: -12,
+                    backgroundColor: theme.palette.primary.main
+                  }}
+                  // railStyle={{ backgroundColor: "red", height: 10 }}
+                  onChange={water =>
+                    dispatch({ type: "setSprinklerRate", sprinklerRate: water })
+                  }
+                />
+              </div>
+            </>
+          )}
+
+          <br />
           <Typography variant="body1" align="center" gutterBottom>
-            The sprinkler runs for {state.sprinklerMinutes}{" "}
-            {state.sprinklerMinutes > 1 ? "min" : "min "}
+            My sprinkler runs for {state.sprinklerMinutes} min
           </Typography>
 
           <br />
@@ -210,7 +253,8 @@ const Sprinkler = ({ classes, theme }) => {
             style={{
               width: "90%",
               margin: "0 auto",
-              marginTop: 24
+              marginTop: 24,
+              marginBottom: 16
             }}
           >
             <SliderWithTooltip
