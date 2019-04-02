@@ -21,23 +21,31 @@ const styles = theme => ({
   titleText: {
     color: theme.palette.text.secondary,
     fontWeight: "700",
-    marginBottom: 32
+    marginBottom: 64
   },
   smallTextTop: {
     padding: 16,
     background: theme.palette.primary.main,
     color: "white",
-    marginBottom: 32
+    marginBottom: 64
   },
   smallTextBottom: {
     padding: 16,
-    marginBottom: 32
+    marginBottom: 64
   }
 });
 
 const Landing = ({ classes }) => {
   return (
     <div className={classes.root}>
+      <div
+        style={{
+          width: "90%",
+          marginBottom: 64
+        }}
+      >
+        <Logos />
+      </div>
       <div className={classes.titleText}>
         <Typography
           color="inherit"
@@ -81,15 +89,6 @@ const Landing = ({ classes }) => {
         You can find out your watering needs for today and the next two days
       </Typography>
 
-      {/*<Typography
-        variant="body2"
-        align="center"
-        className={classes.smallTextBottom}
-      >
-        To ensure a healthy lawn, use less water and save money please follow
-        the simple but scientific guidance
-      </Typography> */}
-
       <ButtonLink
         to="/location"
         variant="outlined"
@@ -98,20 +97,6 @@ const Landing = ({ classes }) => {
       >
         Get Started
       </ButtonLink>
-
-      <div
-        style={{
-          width: "90%",
-          position: "absolute",
-          bottom: 16
-          // paddingLeft: 16,
-          // paddingRight: 16,
-          // marginTop: "20%",
-          // background: "pink"
-        }}
-      >
-        <Logos />
-      </div>
     </div>
   );
 };
