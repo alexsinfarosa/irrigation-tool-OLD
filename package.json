@@ -24,6 +24,7 @@
     "rc-slider": "^8.6.7",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-ga": "^2.5.7",
     "react-places-autocomplete": "^7.2.1",
     "react-scripts": "2.1.8",
     "react-spinners": "^0.5.3",

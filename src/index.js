@@ -10,6 +10,14 @@ import DateFnsUtils from "@date-io/date-fns";
 
 import { AppProvider } from "./context/appContext";
 
+import ReactGA from "react-ga";
+ReactGA.initialize("UA-137506548-1");
+ReactGA.pageview(window.location.pathname + window.location.search);
+ReactGA.event({
+  category: "User",
+  action: "Sent message"
+});
+
 function Root() {
   return (
     <AppProvider>
