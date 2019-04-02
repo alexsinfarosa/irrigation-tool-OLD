@@ -87,7 +87,7 @@ const BarChartDeficit = React.memo(({ theme }) => {
 
     const dom = Math.max(absMin, absMax);
     // console.log(`FIRST: ${dom + dom * 0.4} `);
-    return dom + dom * 0.4;
+    return dom + dom * 0.8;
   };
 
   const [domain, setDomain] = React.useState(initialDomain);
