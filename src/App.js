@@ -19,6 +19,7 @@ import Info from "./pages/Info";
 import Lawn from "./pages/Lawn";
 import Forecast from "./pages/Forecast";
 import LawnList from "./pages/LawnList";
+import NotFound from "./pages/NotFound";
 
 // fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -117,6 +118,8 @@ const App = ({ classes }) => {
           <Sprinkler path="sprinkler" />
           <Info path="info" />
           <Lawn path="home" />
+          <Lawn path="/*" />
+          <NotFound path="notFound" />
           <Forecast path="forecast" />
           <LawnList path="lawns" />
         </Router>
