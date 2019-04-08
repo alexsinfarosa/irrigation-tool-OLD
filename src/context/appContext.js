@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
   }
 
   React.useEffect(() => {
-    lawns.length === 0 ? navigate("/") : navigate("/info");
+    lawns.length === 0 ? navigate("/") : navigate("/home");
     const count = visits + 1;
     setVisits(count);
     window.localStorage.setItem(
