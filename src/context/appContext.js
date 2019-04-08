@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
   }
 
   React.useEffect(() => {
-    lawns.length === 0 ? navigate("/") : navigate("/notFound");
+    lawns.length === 0 ? navigate("/") : navigate("/home");
     const count = visits + 1;
     setVisits(count);
     window.localStorage.setItem(
@@ -45,10 +45,50 @@ const AppProvider = ({ children }) => {
     );
   }, []);
 
+  function isWaterAllowed(streetNumber) {
+    const today = new Date().getDate();
+    const isTodayEven = today % 2 === 0;
+    const isStreetNumberEven = streetNumber % 2 === 0;
+    if (isTodayEven === isStreetNumberEven) return true;
+    return false;
+  }
+
   const fetchForecastAndData = async updatedLawn => {
     // console.log("FetchForecastAndData");
-    const lawnCopy = { ...updatedLawn };
+    let lawnCopy = { ...updatedLawn };
+    console.log(lawnCopy.data[38]);
+    if (isWaterAllowed(14)) {
+      const index = lawnCopy.data.findIndex(
+        d => d.date === new Date().toLocaleDateString()
+      );
+      console.log(index);
 
+      const water = (lawnCopy.sprinklerRate * lawnCopy.sprinklerMinutes) / 60;
+      const pcpns = lawnCopy.data.map(d => d.pcpn);
+      pcpns[index] = pcpns[index] + water;
+      const pets = lawnCopy.data.map(d => d.pet);
+      const updatedDeficit = runWaterDeficitModel(pcpns, pets);
+
+      const updatedData = lawnCopy.data.map((day, i) => {
+        let p = { ...day };
+
+        p.pcpn = i === index ? day.pcpn + water : day.pcpn;
+        p.waterAppliedByUser = i === index ? water : 0;
+        p.deficit = +updatedDeficit.deficitDaily[i].toFixed(2);
+        p.barDeficit = p.deficit - p.threshold;
+        return p;
+      });
+
+      lawnCopy = { ...lawnCopy, data: updatedData };
+    }
+
+    let lawnsCopy = lawns.filter(l => l.id !== lawnCopy.id);
+    const newLawns = [lawnCopy, ...lawnsCopy];
+    updateLawn(lawnCopy);
+    setLawns(newLawns);
+
+    console.log(lawnCopy.data[38]);
+    console.log(lawnCopy);
     const minutes = differenceInMinutes(Date.now(), new Date(lawnCopy.updated));
     // console.log(lawnCopy.address, lawnCopy.updated);
     // console.log(minutes);
@@ -87,7 +127,7 @@ const AppProvider = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
-    // console.log("useEffect 2");
+    console.log("useEffect 2");
     if (lawns.length !== 0) {
       window.localStorage.setItem(
         "lawn-irrigation-tool",
