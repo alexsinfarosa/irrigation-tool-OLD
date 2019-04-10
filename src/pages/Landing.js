@@ -72,7 +72,7 @@ const Landing = ({ classes }) => {
           align="left"
           gutterBottom
         >
-          Calculator
+          Tool
         </Typography>
 
         <Typography variant="h6" color="error">
