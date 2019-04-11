@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/lawn-irrigation-tool/precache-manifest.cd15e9023a486eb8a8b2693a5943991d.js"
+  "/lawn-irrigation-tool/precache-manifest.451047b46ddad92335cc00f2e929026e.js"
 );
 
 workbox.clientsClaim();
